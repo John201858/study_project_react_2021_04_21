@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { Button } from "antd";
+import "antd/dist/antd.css";
 import "./styles.css";
 
 function Header({ name }) {
@@ -13,15 +15,15 @@ function Header({ name }) {
   return (
     <div className="container">
       <Hello name={name} flag={flag} />
-      <button
+      <Button
+        type="primary"
         onClick={() => {
           setFlag(!flag);
           setCount(count + 1);
-          console.log(`${count}`);
         }}
       >
         Поменять цвет {+flag}
-      </button>
+      </Button>
     </div>
   );
 }
@@ -37,6 +39,7 @@ export default function App() {
       <Header name="Джон" />
       <Header name="Джесси" />
       <Header name="Джэк" />
+      <Header name="Майкл" />
       <h2>Start editing to see some magic happen!</h2>
     </div>
   );
