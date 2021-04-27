@@ -39,6 +39,7 @@ export default function App() {
       <Header name="Джон" />
       <Header name="Джесси" />
       <Header name="Джэк" />
+      <Header name="Майкл" />
       <h2>Start editing to see some magic happen!</h2>
     </div>
   );
