@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Button } from "antd";
+import { Button, Avatar, Image } from "antd";
 import "antd/dist/antd.css";
 import "./styles.css";
 import users from "../users.json";
@@ -20,8 +20,14 @@ function Header({ user }) {
     return (
       <div className="container">
         <Hello name={user.name} flag={flag} />
-        <img src={user.imgUrl} />
-        <p>{user.text}</p>
+        {flag || (
+          <div class="content">
+            <div class="user_avatar">
+              <Avatar size={130} src={user.imgUrl} />
+            </div>
+            <p class="user_text">{user.text}</p>
+          </div>
+        )}
         <Button
           type="primary"
           onClick={() => {
@@ -29,7 +35,7 @@ function Header({ user }) {
             setCount(count + 1);
           }}
         >
-          Поменять цвет {+flag}
+          {flag ? "Открыть сообщение" : "Закрыть сообщение"}
         </Button>
       </div>
     );
