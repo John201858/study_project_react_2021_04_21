@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Button, Avatar, Image } from "antd";
+import { Button, Avatar } from "antd";
 import "antd/dist/antd.css";
 import "./styles.css";
 import users from "../users.json";
@@ -24,6 +24,7 @@ function Header({ user }) {
           <div class="content">
             <div class="user_avatar">
               <Avatar size={130} src={user.imgUrl} />
+              <p>{user.name}</p>
             </div>
             <p class="user_text">{user.text}</p>
           </div>
@@ -51,7 +52,7 @@ function Hello({ name, flag }) {
 export default function App() {
   return (
     <div className="App">
-      <h1>Hello CodeSandbox</h1>
+      <h1>Лента новостей</h1>
       <Header user={users} />
       <h2>Start editing to see some magic happen!</h2>
     </div>

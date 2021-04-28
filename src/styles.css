@@ -20,12 +20,17 @@
   margin-bottom: 20px;
 }
 
-.user_avatar {
-  /* display: flexbox; */
+.user_avatar p {
+  padding-top: 10px;
+  font-weight: bold;
+  text-align: center;
 }
 
 .user_text {
   /* display: flexbox; */
+  padding-left: 20px;
+  color: #6d6a6a;
+  text-align: left;
 }
 
 .man {
