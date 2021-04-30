@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { Button, Avatar } from "antd";
-import Hello from "../Hello.js";
+import { Button, Avatar, Row, Col } from "antd";
 import "antd/dist/antd.css";
 import "./styles.css";
 
@@ -15,15 +14,17 @@ export default function Users({ user }) {
 
   return (
     <>
-      <Hello name={user.name} flag={flag} />
+      <h1 className={flag ? "man" : "woman"}>Здравствуйте {user.name}!</h1>
       {flag || (
-        <div class="content">
-          <div class="user_avatar">
+        <Row>
+          <Col className="avatar" xs={24} sm={24} md={6} lg={6} xl={6}>
             <Avatar size={130} src={user.imgUrl} />
-            <p>{user.name}</p>
-          </div>
-          <p class="user_text">{user.text}</p>
-        </div>
+            <p className="avatar_name">{user.name}</p>
+          </Col>
+          <Col xs={24} sm={24} md={18} lg={18} xl={18}>
+            <p className="user_text">{user.text}</p>
+          </Col>
+        </Row>
       )}
       <Button
         type="primary"
