@@ -5,11 +5,11 @@ import "moment/locale/ru";
 import "antd/dist/antd.css";
 import "./styles.scss";
 
-export default function Conversation({ user, date }) {
-  const [time, setTime] = useState(moment(date).fromNow());
+export default function Conversation({ user }) {
+  const [time, setTime] = useState(moment(user.date).fromNow());
 
   const interval = setInterval(() => {
-    setTime((time) => (time = moment(date).fromNow()));
+    setTime((time) => (time = moment(user.date).fromNow()));
   }, 1000);
 
   useEffect(() => clearInterval(interval));
@@ -18,7 +18,7 @@ export default function Conversation({ user, date }) {
     <div className="container">
       <div className="conv">
         <div className="conv_img">
-          <Avatar size={50} src={user.imgUrl} />
+          <Avatar size={50} src={user.avatar} />
         </div>
 
         <div className="conv_content">
@@ -28,7 +28,9 @@ export default function Conversation({ user, date }) {
           </div>
           <div className="convLine">
             <span className="convLine_text">{user.text}</span>
-            {true && <span className="convLine_count">{user.age}</span>}
+            {user.isRead && (
+              <span className="convLine_count">{user.numbMessage}</span>
+            )}
           </div>
         </div>
       </div>

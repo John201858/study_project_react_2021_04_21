@@ -7,7 +7,12 @@ export default function App() {
   return (
     <div className="App">
       {/* <Message user={users} /> */}
-      <Conversation user={users[0]} date={"Tue May 04 2021 15:59:02"} />
+      <Conversation user={users[0]} />
+      <Conversation user={users[1]} />
+      <Conversation user={users[2]} />
+      <Conversation user={users[3]} />
+      <Conversation user={users[4]} />
+      <Conversation user={users[5]} />
     </div>
   );
 }
