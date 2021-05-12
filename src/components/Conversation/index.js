@@ -3,10 +3,9 @@ import { Avatar } from "antd";
 import moment from "moment";
 import "moment/locale/ru";
 import "antd/dist/antd.css";
-import "./styles.scss";
+import "./Conversation.scss";
 
 export default function Conversation({ user }) {
-  
   const [time, setTime] = useState(moment(user.date).calendar());
 
   const interval = setInterval(() => {
