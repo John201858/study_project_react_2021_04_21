@@ -6,10 +6,11 @@ import "antd/dist/antd.css";
 import "./styles.scss";
 
 export default function Conversation({ user }) {
-  const [time, setTime] = useState(moment(user.date).fromNow());
+  
+  const [time, setTime] = useState(moment(user.date).calendar());
 
   const interval = setInterval(() => {
-    setTime((time) => (time = moment(user.date).fromNow()));
+    setTime((time) => (time = moment(user.date).calendar()));
   }, 1000);
 
   useEffect(() => clearInterval(interval));

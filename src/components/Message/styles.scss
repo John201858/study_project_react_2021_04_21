@@ -20,7 +20,7 @@
       &_user {
         display: flex;
         justify-content: space-between;
-        flex-direction: row;
+        
         align-items: center;
 
         &__name {
@@ -32,7 +32,7 @@
         }
 
         &__date {
-          padding-right: 5px;
+          padding: 0 5px 0 5px;
           color: #94A1B3;
           font-size: 12px;
         }
@@ -54,4 +54,12 @@
       }
     }
   }
+}
+
+.me {
+  flex-direction: row-reverse;
+}
+
+.border {
+  border-radius: 15px 0 15px 15px !important;
 }
