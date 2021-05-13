@@ -32,7 +32,7 @@ export default function Message({ user }) {
               <span className="content_user__date">{time}</span>
             </div>
             <div className={classNames("content_block", { border: ifMe })}>
-              <span className="content_block__text">{user.text}</span>
+              <span className={classNames("content_block__text", { text_color: ifMe })}>{user.text}</span>
             </div>
           </div>
         </div>

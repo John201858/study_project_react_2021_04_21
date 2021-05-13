@@ -1,8 +1,7 @@
 // import Message from "./components/Message.js";
 import "./styles.css";
 import users from "../users.json";
-import Conversation from "./components/Conversation";
-import Message from "./components/Message";
+import { Conversation, Message } from "./components";
 
 export default function App() {
   return (
