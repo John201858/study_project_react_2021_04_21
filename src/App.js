@@ -1,21 +1,31 @@
 // import Message from "./components/Message.js";
+import { useState } from "react";
 import "./styles.css";
 import users from "../users.json";
 import { Conversation, Message } from "./components";
 
 export default function App() {
+  const [selection, setSelection] = useState("");
+  const headerClick = (event) => {
+    console.log(event.target.closest("div[id]").id);
+    setSelection(
+      (selection) => (selection = event.target.closest("div[id]").id)
+    );
+  };
+  // setSelection(selection => selection = headerClick());
+
   return (
-    <div className="App">
-      <Message user={users[0]} />
+    <div className="App" onClick={headerClick}>
+      {/* <Message user={users[0]} />
       <Message user={users[1]} />
       <Message user={users[2]} />
-      <Message user={users[3]} />
-      {/* <Conversation user={users[0]} />
-      <Conversation user={users[1]} />
-      <Conversation user={users[2]} />
-      <Conversation user={users[3]} />
-      <Conversation user={users[4]} />
-      <Conversation user={users[5]} /> */}
+      <Message user={users[3]} /> */}
+      <Conversation user={users[0]} selection={selection} />
+      <Conversation user={users[1]} selection={selection} />
+      <Conversation user={users[2]} selection={selection} />
+      <Conversation user={users[3]} selection={selection} />
+      <Conversation user={users[4]} selection={selection} />
+      <Conversation user={users[5]} selection={selection} />
     </div>
   );
 }
