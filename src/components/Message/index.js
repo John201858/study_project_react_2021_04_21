@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react";
 import moment from "moment";
 import "moment/locale/ru";
-import { Avatar } from "antd";
 import classNames from "classnames";
-import "antd/dist/antd.css";
 import "./Message.scss";
 
 export default function Message({ user }) {
@@ -18,22 +16,18 @@ export default function Message({ user }) {
 
   return (
     <div className={classNames("message_block", { me: ifMe })}>
-      <div className={classNames("message_container", { me: ifMe })}>
-        <div className="col-avatar">
-          <div className="avatar">
-            <Avatar size={50} src={user.avatar} />
-          </div>
+      <div className={classNames("message", { "message--ifMe": ifMe })}>
+        <div className="message_avatar">
+          <img src={user.avatar} alt={`Avatar ${user.name}`} />
         </div>
 
-        <div className="col-content">
-          <div className="content">
-            <div className={classNames("content_user", { me: ifMe })}>
-              <span className="content_user__name">{user.name}</span>
-              <span className="content_user__date">{time}</span>
-            </div>
-            <div className={classNames("content_block", { border: ifMe })}>
-              <span className={classNames("content_block__text", { text_color: ifMe })}>{user.text}</span>
-            </div>
+        <div className="message_content">
+          <div className="message_content-user">
+            <p>{user.name}</p>
+            <span>{time}</span>
+          </div>
+          <div className="message_content-text">
+            <p>{user.text}</p>
           </div>
         </div>
       </div>

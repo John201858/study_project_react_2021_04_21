@@ -7,57 +7,80 @@ $primary-color: #910202;
   min-width: 400px;
 }
 
-.message_container {
+.message {
   display: flex;
   overflow: visible;
   width: 100%;
   height: auto;
   max-width: 80%;
   align-items: flex-start;
+  $self: &;
 
-  .col-avatar {
+  &_avatar {
     margin-left: 10px;
     margin-right: 10px;
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
   }
 
-  .col-content {
+  &_content {
     min-width: 300px;
     padding: 15px 5px;
+    &-user {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      p {
+        color: #475466; 
+        font-family: Roboto, sans-serif;
+        font-size: 14px;
+        font-weight: 600;
+        letter-spacing: 0.2px;
+        line-height: 20px;
+      }
+      span {
+        padding: 0 5px 0 5px;
+        color: #94A1B3;
+        font-size: 12px;
+        font-family: Roboto, sans-serif;
+        letter-spacing: 0.2px;
+        font-weight: 400;
+      }
+    }
 
-    .content {
+    &-text {
+      margin-top: 5px;
+      padding: 20px;
+      border-radius: 0 15px 15px 15px;
+      background-color: $primary-color;
+      p {
+        font-family: Roboto, sans-serif;
+        font-size: 14px;
+        font-weight: 400;
+        color: #ffffff;
+        letter-spacing: 0.2px;
+      }
+    }
+  }
 
-      &_user {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        &__name {
-          font-family: Roboto, sans-serif;
-          font-size: 14px;
-          font-weight: 600;
-          color: #475466;
-          letter-spacing: 0.2px;
-        }
-
-        &__date {
-          padding: 0 5px 0 5px;
-          color: #94A1B3;
-          font-size: 12px;
-        }
+  &--ifMe {
+    flex-direction: row-reverse;
+    #{$self}_content {
+      
+      &-user {
+        flex-direction: row-reverse;
       }
 
-      &_block {
-        margin-top: 5px;
-        padding: 20px;
-        border-radius: 0 15px 15px 15px;
-        background-color: $primary-color;
+      &-text {
+        border-radius: 15px 0 15px 15px !important;
+        background-color: #ffffff !important;
+        border: 1px solid $primary-color !important;
 
-        &__text {
-          font-family: Roboto, sans-serif;
-          font-size: 14px;
-          font-weight: 400;
-          color: #ffffff;
-          letter-spacing: 0.2px;
+        p {
+          color: $primary-color !important;
         }
       }
     }
@@ -68,12 +91,10 @@ $primary-color: #910202;
   flex-direction: row-reverse;
 }
 
-.border  {
-  border-radius: 15px 0 15px 15px !important;
-  background-color: #ffffff !important;
-  border: 1px solid $primary-color !important;
-}
+// .border  {
+  
+// }
 
-.text_color {
-  color: $primary-color !important;
-}
+// .text_color {
+  
+// }
