@@ -1,6 +1,6 @@
 $primary-color: #910202;
 
-.message_block {
+.message__block {
   display: flex;
   margin-bottom: 5px;
   width: 100%;
@@ -16,7 +16,7 @@ $primary-color: #910202;
   align-items: flex-start;
   $self: &;
 
-  &_avatar {
+  &__avatar {
     margin-left: 10px;
     margin-right: 10px;
     img {
@@ -26,7 +26,7 @@ $primary-color: #910202;
     }
   }
 
-  &_content {
+  &__content {
     min-width: 300px;
     padding: 15px 5px;
     &-user {
@@ -57,6 +57,7 @@ $primary-color: #910202;
       padding: 20px;
       border-radius: 0 15px 15px 15px;
       background-color: $primary-color;
+
       p {
         font-family: Roboto, sans-serif;
         font-size: 14px;
@@ -65,7 +66,12 @@ $primary-color: #910202;
         letter-spacing: 0.2px;
         line-height: 20px;
       }
-      .attachmens {
+
+      img {
+        border-radius: 7px;
+      }
+
+      &--attachmens {
         margin-top: 14px;
         img {
           margin-top: 6px;
@@ -79,11 +85,19 @@ $primary-color: #910202;
     }
   }
 
-  &--ifMe {
+  &--isMe {
     flex-direction: row-reverse;
-    #{$self}_content {
+    #{$self}__content {
       &-user {
         flex-direction: row-reverse;
+        span {
+          .CheckOutlined {
+            color: #929191;
+            &--isRead {
+              color: $primary-color;
+            }
+          }
+        }
       }
 
       &-text {
@@ -96,6 +110,7 @@ $primary-color: #910202;
       }
     }
   }
+  
 }
 
 .me {

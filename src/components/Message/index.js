@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 import "moment/locale/ru";
 import classNames from "classnames";
+import { CheckOutlined } from "@ant-design/icons";
 import "./Message.scss";
 
 export default function Message({ user }) {
   const [time, setTime] = useState(moment(user.date).fromNow());
-  let ifMe = user.isRead;
+  let isMe = user.isRead;
 
   const interval = setInterval(() => {
     setTime((time) => (time = moment(user.date).fromNow()));
@@ -15,20 +16,36 @@ export default function Message({ user }) {
   useEffect(() => clearInterval(interval));
 
   return (
-    <div className={classNames("message_block", { me: ifMe })}>
-      <div className={classNames("message", { "message--ifMe": ifMe })}>
-        <div className="message_avatar">
+    <div className={classNames("message__block", { me: isMe })}>
+      <div className={classNames("message", { "message--isMe": isMe })}>
+        <div className="message__avatar">
           <img src={user.avatar} alt={`Avatar ${user.name}`} />
         </div>
-        <div className="message_content">
-          <div className="message_content-user">
+        <div className="message__content">
+          <div className="message__content-user">
             <p>{user.name}</p>
-            <span>{time}</span>
+            <span>
+              {isMe && (
+                <CheckOutlined
+                  className={classNames("CheckOutlined", {
+                    "CheckOutlined--isRead": user.isActive
+                  })}
+                />
+              )}
+              {time}
+            </span>
           </div>
-          <div className="message_content-text">
-            <p>{user.text}</p>
-            {user.attachmens && (
-              <div className="attachmens">
+          <div className="message__content-text">
+            {user.text ? (
+              <p>{user.text}</p>
+            ) : (
+              user.attachmens.length === 1 && (
+                <img src={user.attachmens} alt="attach" />
+              )
+            )}
+
+            {user.attachmens && user.attachmens.length > 1 && (
+              <div className="message__content-text--attachmens">
                 {user.attachmens.map((attach) => (
                   <img src={attach} alt="attach" />
                 ))}
