@@ -20,7 +20,6 @@ export default function Message({ user }) {
         <div className="message_avatar">
           <img src={user.avatar} alt={`Avatar ${user.name}`} />
         </div>
-
         <div className="message_content">
           <div className="message_content-user">
             <p>{user.name}</p>
@@ -28,6 +27,13 @@ export default function Message({ user }) {
           </div>
           <div className="message_content-text">
             <p>{user.text}</p>
+            {user.attachmens && (
+              <div className="attachmens">
+                {user.attachmens.map((attach) => (
+                  <img src={attach} alt="attach" />
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>

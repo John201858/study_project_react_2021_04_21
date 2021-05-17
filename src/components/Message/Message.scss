@@ -41,6 +41,7 @@ $primary-color: #910202;
         letter-spacing: 0.2px;
         line-height: 20px;
       }
+
       span {
         padding: 0 5px 0 5px;
         color: #94A1B3;
@@ -62,6 +63,18 @@ $primary-color: #910202;
         font-weight: 400;
         color: #ffffff;
         letter-spacing: 0.2px;
+        line-height: 20px;
+      }
+      .attachmens {
+        margin-top: 14px;
+        img {
+          margin-top: 6px;
+          margin-right: 8px;
+          width: 70px;
+          height: 70px;
+          border-radius: 7px;
+          cursor: pointer;
+        }
       }
     }
   }
@@ -69,7 +82,6 @@ $primary-color: #910202;
   &--ifMe {
     flex-direction: row-reverse;
     #{$self}_content {
-      
       &-user {
         flex-direction: row-reverse;
       }
@@ -78,7 +90,6 @@ $primary-color: #910202;
         border-radius: 15px 0 15px 15px !important;
         background-color: #ffffff !important;
         border: 1px solid $primary-color !important;
-
         p {
           color: $primary-color !important;
         }

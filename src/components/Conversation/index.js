@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Avatar } from "antd";
+// import { Avatar } from "antd";
 import moment from "moment";
 import "moment/locale/ru";
-import "antd/dist/antd.css";
+// import "antd/dist/antd.css";
 import "./Conversation.scss";
 import classNames from "classnames";
 
@@ -24,7 +24,7 @@ export default function Conversation({ user, selection }) {
     >
       <div className="conv">
         <div className="conv_img">
-          <Avatar size={50} src={user.avatar} />
+          <img src={user.avatar} alt={`Avatar ${user.name}`} />
         </div>
 
         <div className="conv_content">
