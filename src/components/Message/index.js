@@ -28,7 +28,7 @@ export default function Message({ user }) {
               {isMe && (
                 <CheckOutlined
                   className={classNames("CheckOutlined", {
-                    "CheckOutlined--isRead": user.isActive
+                    isRead: user.isActive
                   })}
                 />
               )}
@@ -36,18 +36,11 @@ export default function Message({ user }) {
             </span>
           </div>
           <div className="message__content-text">
-            {user.text ? (
-              <p>{user.text}</p>
-            ) : (
-              user.attachmens.length === 1 && (
-                <img src={user.attachmens} alt="attach" />
-              )
-            )}
-
-            {user.attachmens && user.attachmens.length > 1 && (
+            {user.text && <p>{user.text}</p>}
+            {user.attachmens && (
               <div className="message__content-text--attachmens">
                 {user.attachmens.map((attach) => (
-                  <img src={attach} alt="attach" />
+                  <img src={attach} alt="Вложение: картинка" />
                 ))}
               </div>
             )}

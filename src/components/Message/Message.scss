@@ -12,7 +12,7 @@ $primary-color: #910202;
   overflow: visible;
   width: 100%;
   height: auto;
-  max-width: 80%;
+  max-width: 60%;
   align-items: flex-start;
   $self: &;
 
@@ -54,11 +54,12 @@ $primary-color: #910202;
 
     &-text {
       margin-top: 5px;
-      padding: 20px;
+      padding: 0 20px 20px 20px;
       border-radius: 0 15px 15px 15px;
       background-color: $primary-color;
 
       p {
+        padding-top: 20px;
         font-family: Roboto, sans-serif;
         font-size: 14px;
         font-weight: 400;
@@ -72,9 +73,13 @@ $primary-color: #910202;
       }
 
       &--attachmens {
-        margin-top: 14px;
+        padding-top: 15px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+
         img {
-          margin-top: 6px;
+          margin-top: 7px;
           margin-right: 8px;
           width: 70px;
           height: 70px;
@@ -82,6 +87,15 @@ $primary-color: #910202;
           cursor: pointer;
         }
       }
+
+      // .first_attachmens {
+      //   display: block;
+      //   margin: 0;
+      //   width: 100%;
+      //   max-width: 350px;
+      //   height: auto;
+      // }
+
     }
   }
 
@@ -91,11 +105,8 @@ $primary-color: #910202;
       &-user {
         flex-direction: row-reverse;
         span {
-          .CheckOutlined {
-            color: #929191;
-            &--isRead {
-              color: $primary-color;
-            }
+          .isRead {
+            color: rgb(37, 175, 209);
           }
         }
       }
