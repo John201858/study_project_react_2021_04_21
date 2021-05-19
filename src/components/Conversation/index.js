@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-// import { Avatar } from "antd";
 import moment from "moment";
+import CheckRead from "../CheckRead";
 import "moment/locale/ru";
-// import "antd/dist/antd.css";
 import "./Conversation.scss";
 import classNames from "classnames";
 
@@ -15,28 +14,33 @@ export default function Conversation({ user, selection }) {
 
   useEffect(() => clearInterval(interval));
 
+  const isMe = user.isActive;
+
   return (
     <div
       className={classNames("container", {
-        "border-select": user._id === selection
+        select: user._id === selection
       })}
       id={user._id}
     >
-      <div className="conv">
-        <div className="conv_img">
+      <div className="conversation">
+        <div className="conversation__avatar">
           <img src={user.avatar} alt={`Avatar ${user.name}`} />
         </div>
 
-        <div className="conv_content">
-          <div className="convLine">
-            <span className="convLine_Name">{user.name}</span>
-            <span className="convLine_date">{time}</span>
+        <div className="conversation__data">
+          <div className="conversation__data-user">
+            <p>{user.name}</p>
+            <span>{time}</span>
           </div>
-          <div className="convLine">
-            <span className="convLine_text">{user.text}</span>
-            {user.isRead && (
-              <span className="convLine_count">{user.numbMessage}</span>
-            )}
+          <div className="conversation__data-text">
+            <p>{user.text}</p>
+            {(isMe && <CheckRead isRead={user.isRead} />) ||
+              (user.isRead && (
+                <span className="conversation__data-text--count">
+                  {user.numbMessage > 9 ? "9+" : user.numbMessage}
+                </span>
+              ))}
           </div>
         </div>
       </div>

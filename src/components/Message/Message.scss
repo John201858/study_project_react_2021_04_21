@@ -1,3 +1,5 @@
+@import "../../styles.css";
+
 $primary-color: #0c87b8;
 
 .message__block {
@@ -37,7 +39,6 @@ $primary-color: #0c87b8;
       align-items: center;
       p {
         color: #475466; 
-        font-family: Roboto, sans-serif;
         font-size: 14px;
         font-weight: 600;
         letter-spacing: 0.2px;
@@ -48,7 +49,6 @@ $primary-color: #0c87b8;
         padding: 0 5px 0 5px;
         color: #94A1B3;
         font-size: 12px;
-        font-family: Roboto, sans-serif;
         letter-spacing: 0.2px;
         font-weight: 400;
       }
@@ -63,7 +63,6 @@ $primary-color: #0c87b8;
 
       p {
         padding-top: 20px;
-        font-family: Roboto, sans-serif;
         font-size: 14px;
         font-weight: 400;
         color: #ffffff;
@@ -97,11 +96,6 @@ $primary-color: #0c87b8;
     #{$self}__content {
       &-user {
         flex-direction: row-reverse;
-        span {
-          .isRead {
-            color: rgb(37, 175, 209);
-          }
-        }
       }
 
       &-text {

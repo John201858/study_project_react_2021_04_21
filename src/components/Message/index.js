@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import moment from "moment";
 import "moment/locale/ru";
 import classNames from "classnames";
-import { CheckOutlined } from "@ant-design/icons";
 import "./Message.scss";
+import CheckRead from "../CheckRead";
 
 export default function Message({ user }) {
   const [time, setTime] = useState(moment(user.date).fromNow());
@@ -25,13 +25,7 @@ export default function Message({ user }) {
           <div className="message__content-user">
             <p>{user.name}</p>
             <span>
-              {isMe && (
-                <CheckOutlined
-                  className={classNames("CheckOutlined", {
-                    isRead: user.isActive
-                  })}
-                />
-              )}
+              {isMe && <CheckRead isRead={user.isActive} />}
               {time}
             </span>
           </div>

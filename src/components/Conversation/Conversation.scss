@@ -1,4 +1,6 @@
-$primary-color: #910202;
+@import "../../styles.css";
+
+$primary-color: #0c87b8;
 
 .container {
   display: flex;
@@ -11,77 +13,79 @@ $primary-color: #910202;
   align-items: center;
   cursor: pointer;
 
-  .conv {
+  .conversation {
     display: flex;
     width: 349px;
     height: 76px;
     padding: 14px 12px;
 
-    &_img {
+    &__avatar {
       display: flex;
       justify-content: center;
       flex-direction: column;
       img {
         width: 50px;
         height: 50px;
+        overflow: hidden;
         border-radius: 50%;
       }
     }
 
-    &_content {
+    &__data {
       display: flex;
       margin-left: 20px;
       width: 100%;
       flex-direction: column;
-      justify-content: center;
-    }
+      justify-content: space-around;
 
-    .convLine {
-      display: flex;
-      justify-content: space-between;
-      flex-direction: row;
-      align-items: center;
-
-      &_date {
-        color: #94a1b3;
-        font-size: 12px;
-        line-height: 16px;
-      }
-
-      &_Name {
-        font-family: Roboto, sans-serif;
-        font-weight: 600;
-        letter-spacing: 0.2px;
-        font-size: 14px;
-      }
-
-      &_text {
-        max-width: 200px;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        color: #475466;
-      }
-
-      &_count {
+      &-user {
         display: flex;
-        background-color: $primary-color;
-        border-radius: 50%;
-        color: #fff;
-        width: 19px;
-        height: 19px;
-        font-weight: 500;
-        font-size: 11px;
-        line-height: 14px;
-        justify-content: center;
-        align-content: center;
+        justify-content: space-between;
         flex-direction: row;
         align-items: center;
-      }
-    }
+        p {
+          font-weight: 600;
+          letter-spacing: 0.2px;
+          font-size: 14px;
+        }
 
-    .convLine:first-child {
-      margin-bottom: 4px;
+        span {
+          color: #94a1b3;
+          font-size: 12px;
+          line-height: 16px;
+        }
+      }
+
+      &-text {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        align-items: center;
+        p {
+          max-width: 200px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          color: #475466;
+          font-size: 14px;
+          font-weight: 400;
+          letter-spacing: 0.2px;
+        }
+
+        &--count {
+          display: flex;
+          background-color: $primary-color;
+          border-radius: 50%;
+          color: #fff;
+          width: 19px;
+          height: 19px;
+          font-weight: 500;
+          font-size: 11px;
+          line-height: 14px;
+          justify-content: center;
+          align-items: center;
+        }
+      }
     }
   }
 }
@@ -90,14 +94,7 @@ $primary-color: #910202;
   background-color: #EDEFF0;
 }
 
-
-.block-border {
-  position: relative;
-  z-index: 1;
-  height: 100%;
-}
-
-.border-select {
+.select {
   border-left: 3px solid $primary-color;
   background-color: #EDEFF0;
 }
