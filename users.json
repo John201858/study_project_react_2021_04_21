@@ -21,10 +21,7 @@
     "longitude": "70.268595",
     "tags": ["Lorem", "eiusmod", "minim", "anim", "tempor"],
     "attachmens": [
-      "https://loremflickr.com/320/240?random=1",
-      "https://loremflickr.com/320/240?random=2",
-      "https://loremflickr.com/320/240?random=3",
-      "https://loremflickr.com/320/240?random=4"
+      "https://loremflickr.com/320/240?random=1"
     ],
     "range": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     "friends": [
@@ -68,13 +65,7 @@
     "range": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     "attachmens": [
       "https://loremflickr.com/320/240?random=5",
-      "https://loremflickr.com/320/240?random=6",
-      "https://loremflickr.com/320/240?random=7",
-      "https://loremflickr.com/320/240?random=8",
-      "https://loremflickr.com/320/240?random=9",
-      "https://loremflickr.com/320/240?random=10",
-      "https://loremflickr.com/320/240?random=11",
-      "https://loremflickr.com/320/240?random=12"
+      "https://loremflickr.com/320/240?random=6"
     ],
     "friends": [
       {

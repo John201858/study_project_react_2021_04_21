@@ -35,16 +35,20 @@ export default function Message({ user }) {
               {time}
             </span>
           </div>
-          <div className="message__content-text">
-            {user.text && <p>{user.text}</p>}
-            {user.attachmens && (
-              <div className="message__content-text--attachmens">
-                {user.attachmens.map((attach) => (
-                  <img src={attach} alt="Вложение: картинка" />
-                ))}
-              </div>
-            )}
-          </div>
+
+          {user.text && (
+            <div className="message__content-text">
+              <p>{user.text}</p>
+            </div>
+          )}
+
+          {user.attachmens && (
+            <div className="message__content-attachmens">
+              {user.attachmens.map((attach) => (
+                <img src={attach} alt="Вложение: картинка" />
+              ))}
+            </div>
+          )}
         </div>
       </div>
     </div>
