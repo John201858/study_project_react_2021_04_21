@@ -15,6 +15,7 @@ export default function Conversation({ user, selection }) {
   useEffect(() => clearInterval(interval));
 
   const isMe = user.isActive;
+  const isOnline = user.isActive;
 
   return (
     <div
@@ -24,7 +25,8 @@ export default function Conversation({ user, selection }) {
       id={user._id}
     >
       <div className="conversation">
-        <div className="conversation__avatar">
+        <div className={classNames("conversation__avatar", {
+          "conversation__avatar--online": isOnline})}>
           <img src={user.avatar} alt={`Avatar ${user.name}`} />
         </div>
 
