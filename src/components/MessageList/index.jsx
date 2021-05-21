@@ -1,4 +1,5 @@
-import  Message from "../Message";
+import Message from "../Message";
+import { SendOutlined, AudioOutlined, CameraOutlined } from "@ant-design/icons";
 import "./MessageList.scss";
 
 export default function MessageList({ user }) {
@@ -17,7 +18,10 @@ export default function MessageList({ user }) {
         {data}
       </div>
       <div className="messageList__input">
+        <AudioOutlined className="messageList__input-icon" />
+        <CameraOutlined className="messageList__input-icon" />
         <input type="text" placeholder="Введите сообщение..."></input>
+        <SendOutlined className="messageList__input-icon" />
       </div>
       
     </section>

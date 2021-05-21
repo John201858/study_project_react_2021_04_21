@@ -38,17 +38,28 @@
   }
 
   &__input {
-    padding: 10px;
+    display: flex;
+    padding: 15px;
     border-top: 1px solid #dadee0;
     width: 100%;
+    align-items: center;
+    &-icon {
+      color: rgba(71, 84, 102, 0.6);
+      padding-right: 8px;
+      font-size: 18px;
+    }
     // height: 100px;
     // background-color: #dadee0;
     input {
+      margin-right: 8px;
       padding: 7px 25px 7px 12px;
       border: 1px solid #DADEE0;
       width: 100%;
       background-color: rgba(0,0,0,0);
       font-size: 14px;
+      &:focus {
+        outline: none;
+      }
     }
   }
 }
