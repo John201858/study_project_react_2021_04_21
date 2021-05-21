@@ -1,12 +1,13 @@
 // import Message from "./components/Message.js";
 import "./styles.css";
 import users from "../users.json";
-import { ConvList, Message } from "./components";
+import { ConvList, MessageList } from "./components";
 
 export default function App() {
   return (
     <div className="App">
-      <ConvList users={users} />
+      {/* <ConvList users={users} /> */}
+      <MessageList user={users} />
       {/* <Message user={users[0]} />
       <Message user={users[1]} />
       <Message user={users[2]} />
