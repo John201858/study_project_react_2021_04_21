@@ -30,7 +30,9 @@ export default function ConvList({ users }) {
           <input type="text" placeholder="Поиск..."></input><SearchOutlined />
         </div>
       </div>
-      <div className="convList__container">{data}</div>
+      <div className="convList__container">
+        {data}
+      </div>
     </div>
   );
 }

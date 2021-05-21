@@ -1,6 +1,7 @@
 @import "../../styles.css";
 
 $primary-color: #0c87b8;
+$background-color: #ebedf0;
 
 .container {
   display: flex;
@@ -24,8 +25,6 @@ $primary-color: #0c87b8;
       display: flex;
       justify-content: center;
       flex-direction: column;
-      $avatar: &;
-
       img {
         width: 50px;
         height: 50px;
@@ -42,7 +41,7 @@ $primary-color: #0c87b8;
           height: 12px;
           border-radius: 50%;
           background-color: #2ab476;
-          border: 2px solid #ffffff;
+          border: 2px solid $background-color;
           right: 0px;
           bottom: 0px;
         }
@@ -80,6 +79,7 @@ $primary-color: #0c87b8;
         flex-direction: row;
         align-items: center;
         p {
+          padding-right: 4px;
           max-width: 200px;
           white-space: nowrap;
           overflow: hidden;
