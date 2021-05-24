@@ -1,22 +1,22 @@
-import { useEffect, useState } from "react";
-import moment from "moment";
+import PropTypes from "prop-types";
 import CheckRead from "../CheckRead";
-import "moment/locale/ru";
+import Time from "../Time";
 import "./Conversation.scss";
 import classNames from "classnames";
 
-export default function Conversation({ user, selection }) {
-  const [time, setTime] = useState(moment(user.date).calendar());
-
-  const interval = setInterval(() => {
-    setTime((time) => (time = moment(user.date).calendar()));
-  }, 1000);
-
-  useEffect(() => clearInterval(interval));
-
-  const isMe = user.isActive;
-  const isOnline = user.isActive;
-
+export default function Conversation({
+  user,
+  selection,
+  date,
+  isMe,
+  isOnline,
+  isRead,
+  numbMessage,
+  name,
+  avatar,
+  text,
+  isNewMessageRead
+}) {
   return (
     <div
       className={classNames("container", {
@@ -25,22 +25,27 @@ export default function Conversation({ user, selection }) {
       id={user._id}
     >
       <div className="conversation">
-        <div className={classNames("conversation__avatar", {
-          "conversation__avatar--online": isOnline})}>
-          <img src={user.avatar} alt={`Avatar ${user.name}`} />
+        <div
+          className={classNames("conversation__avatar", {
+            "conversation__avatar--online": isOnline
+          })}
+        >
+          <img src={avatar} alt={`Avatar ${name}`} />
         </div>
 
         <div className="conversation__data">
           <div className="conversation__data-user">
-            <p>{user.name}</p>
-            <span>{time}</span>
+            <p>{name}</p>
+            <span>
+              <Time date={date} />
+            </span>
           </div>
           <div className="conversation__data-text">
-            <p>{user.text}</p>
-            {(isMe && <CheckRead isRead={user.isRead} />) ||
-              (user.isRead && (
+            <p>{text}</p>
+            {(isMe && <CheckRead isRead={isRead} />) ||
+              (isNewMessageRead && (
                 <span className="conversation__data-text--count">
-                  {user.numbMessage > 9 ? "9+" : user.numbMessage}
+                  {numbMessage > 9 ? "9+" : numbMessage}
                 </span>
               ))}
           </div>
@@ -49,3 +54,17 @@ export default function Conversation({ user, selection }) {
     </div>
   );
 }
+
+Conversation.propTypes = {
+  user: PropTypes.object,
+  selection: PropTypes.string,
+  date: PropTypes.string,
+  isMe: PropTypes.bool,
+  isOnline: PropTypes.bool,
+  isRead: PropTypes.bool,
+  numbMessage: PropTypes.number,
+  name: PropTypes.string,
+  avatar: PropTypes.string,
+  text: PropTypes.string,
+  isNewMessageRead: PropTypes.bool
+};

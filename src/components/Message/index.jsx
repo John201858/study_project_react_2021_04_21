@@ -1,44 +1,43 @@
-import { useEffect, useState } from "react";
-import moment from "moment";
-import "moment/locale/ru";
 import classNames from "classnames";
 import "./Message.scss";
 import CheckRead from "../CheckRead";
+import Time from "../Time";
+import PropTypes from "prop-types";
 
-export default function Message({ user }) {
-  const [time, setTime] = useState(moment(user.date).fromNow());
-  let isMe = user.isRead;
-
-  const interval = setInterval(() => {
-    setTime((time) => (time = moment(user.date).fromNow()));
-  }, 1000);
-
-  useEffect(() => clearInterval(interval));
-
+export default function Message({
+  user,
+  avatar,
+  name,
+  isMe,
+  text,
+  date,
+  isRead,
+  attachmens
+}) {
   return (
     <div className={classNames("message__block", { me: isMe })}>
       <div className={classNames("message", { "message--isMe": isMe })}>
         <div className="message__avatar">
-          <img src={user.avatar} alt={`Avatar ${user.name}`} />
+          <img src={avatar} alt={`Avatar ${name}`} />
         </div>
         <div className="message__content">
           <div className="message__content-user">
             <p>{user.name}</p>
             <span>
-              {isMe && <CheckRead isRead={user.isActive} />}
-              {time}
+              {isMe && <CheckRead isRead={isRead} />}
+              <Time date={date} />
             </span>
           </div>
 
-          {user.text && (
+          {text && (
             <div className="message__content-text">
-              <p>{user.text}</p>
+              <p>{text}</p>
             </div>
           )}
 
-          {user.attachmens && (
+          {attachmens && (
             <div className="message__content-attachmens">
-              {user.attachmens.map((attach) => (
+              {attachmens.map((attach) => (
                 <img src={attach} alt="Вложение: картинка" />
               ))}
             </div>
@@ -48,3 +47,14 @@ export default function Message({ user }) {
     </div>
   );
 }
+
+Message.propTypes = {
+  user: PropTypes.string,
+  avatar: PropTypes.string,
+  name: PropTypes.string,
+  isMe: PropTypes.bool,
+  text: PropTypes.string,
+  date: PropTypes.string,
+  isRead: PropTypes.buul,
+  attachmens: PropTypes.string
+};

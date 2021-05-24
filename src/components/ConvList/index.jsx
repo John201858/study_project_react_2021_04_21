@@ -2,7 +2,7 @@ import { useState } from "react";
 import Conversation from "../Conversation";
 import { Button } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
-import 'antd/dist/antd.css';
+import "antd/dist/antd.css";
 import "./ConvList.scss";
 
 export default function ConvList({ users }) {
@@ -16,7 +16,19 @@ export default function ConvList({ users }) {
   };
 
   const data = users.map((user) => (
-    <Conversation user={user} selection={selection} />
+    <Conversation
+      user={user}
+      date={user.date}
+      isMe={user.isActive}
+      isOnline={user.isRead}
+      isRead={user.isRead}
+      numbMessage={user.numbMessage}
+      name={user.name}
+      avatar={user.avatar}
+      text={user.text}
+      isNewMessageRead={user.isRead}
+      selection={selection}
+    />
   ));
 
   return (
@@ -24,15 +36,16 @@ export default function ConvList({ users }) {
       <div className="convList__header">
         <div className="convList__header-top">
           <p>Диалоги ({data.length})</p>
-          <Button className="convList__header-top--button" type="primary">Новый диалог</Button>
+          <Button className="convList__header-top--button" type="primary">
+            Новый диалог
+          </Button>
         </div>
         <div className="convList__header-bottom">
-          <input type="text" placeholder="Поиск..."></input><SearchOutlined />
+          <input type="text" placeholder="Поиск..."></input>
+          <SearchOutlined />
         </div>
       </div>
-      <div className="convList__container">
-        {data}
-      </div>
+      <div className="convList__container">{data}</div>
     </div>
   );
 }
