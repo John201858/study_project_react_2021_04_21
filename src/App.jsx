@@ -6,7 +6,7 @@ import { ConvList, MessageList } from "./components";
 export default function App() {
   return (
     <div className="App">
-      {/* <ConvList users={users} /> */}
+      <ConvList users={users} />
       <MessageList user={users} />
     </div>
   );

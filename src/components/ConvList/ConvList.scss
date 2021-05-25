@@ -1,5 +1,5 @@
 $primary-color: #0c87b8;
-$background-color: #ebedf0;
+$background-color: #ffffff;
 
 p {
   margin: 0;
@@ -49,9 +49,6 @@ p {
         height: 100%;
         background-color: rgba(0,0,0,0);
         font-size: 14px;
-        &:focus {
-          outline: 1px solid rgba(10, 110, 150, 0.4);
-        }
       }
 
       span {

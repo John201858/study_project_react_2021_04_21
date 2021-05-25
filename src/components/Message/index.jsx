@@ -12,12 +12,16 @@ export default function Message({
   text,
   date,
   isRead,
-  attachmens
+  attachmens,
+  isOnline
 }) {
   return (
     <div className={classNames("message__block", { me: isMe })}>
       <div className={classNames("message", { "message--isMe": isMe })}>
         <div className="message__avatar">
+          <span
+            className={classNames({ "message__avatar--isOnline": isOnline })}
+          />
           <img src={avatar} alt={`Avatar ${name}`} />
         </div>
         <div className="message__content">
@@ -56,5 +60,6 @@ Message.propTypes = {
   text: PropTypes.string,
   date: PropTypes.string,
   isRead: PropTypes.buul,
-  attachmens: PropTypes.string
+  attachmens: PropTypes.string,
+  isOnline: PropTypes.bool
 };
