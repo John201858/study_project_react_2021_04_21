@@ -53,13 +53,13 @@ export default function Message({
 }
 
 Message.propTypes = {
-  user: PropTypes.string,
+  user: PropTypes.object,
   avatar: PropTypes.string,
   name: PropTypes.string,
   isMe: PropTypes.bool,
   text: PropTypes.string,
   date: PropTypes.string,
-  isRead: PropTypes.buul,
-  attachmens: PropTypes.string,
+  isRead: PropTypes.bool,
+  attachmens: PropTypes.array,
   isOnline: PropTypes.bool
 };

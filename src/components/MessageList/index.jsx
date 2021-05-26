@@ -11,11 +11,12 @@ import "./MessageList.scss";
 
 export default function MessageList({ user }) {
   const [change, setChange] = useState("");
-  const u = sortBy(user, obj => new Date(obj.date)).reverse();
+  const u = sortBy(user, (obj) => new Date(obj.date)).reverse();
   console.log(u);
 
   const data = user.map((user) => (
     <Message
+      key={user._id}
       user={user}
       avatar={user.avatar}
       name={user.name}

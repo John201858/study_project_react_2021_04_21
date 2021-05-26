@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Conversation from "../Conversation";
+import sortBy from "lodash/sortBy";
 import { Button } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import "antd/dist/antd.css";
@@ -7,11 +8,16 @@ import "./ConvList.scss";
 
 export default function ConvList({ users }) {
   const [selection, setSelection] = useState("");
-  const [filtred, setFiltred] = useState(Array.from(users))
+  
+  const sort = sortBy(
+    users, data => new Date(data.date)
+  ).reverse();
+
+  const [filtred, setFiltred] = useState(Array.from(sort))
 
   const filtration = value => {
     setFiltred(
-      users.filter(
+      sort.filter(
         data => data.name.toLowerCase().indexOf(value.toLowerCase()) >= 0
       )
     );
@@ -41,6 +47,7 @@ export default function ConvList({ users }) {
       <div className="convList__container">
         {filtred.map((user) => (
           <Conversation
+            key={user._id}
             user={user}
             date={user.date}
             isMe={user.isActive}
