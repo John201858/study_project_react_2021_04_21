@@ -1,8 +1,11 @@
 import { useState } from "react";
+
 import Conversation from "../Conversation";
+
 import sortBy from "lodash/sortBy";
-import { Button } from "antd";
+import { Button, Empty } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+
 import "antd/dist/antd.css";
 import "./ConvList.scss";
 
@@ -45,7 +48,7 @@ export default function ConvList({ users }) {
         </div>
       </div>
       <div className="convList__container">
-        {filtred.map((user) => (
+        {filtred.length ? filtred.map((user) => (
           <Conversation
             key={user._id}
             user={user}
@@ -60,7 +63,13 @@ export default function ConvList({ users }) {
             isNewMessageRead={user.isRead}
             selection={selection}
           />
-        ))}
+        )) : 
+        <div className="convList__container-empty">
+          <Empty
+            style={{ color: "rgba(71, 84, 102, 0.7)" }}
+            description="Нет бесед"
+          />
+        </div>}
       </div>
     </div>
   );

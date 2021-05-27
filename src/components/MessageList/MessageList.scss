@@ -34,7 +34,16 @@
 
   &__content {
     padding: 15px 10px 0 10px;
+    height: 100%;
     overflow-y: auto;
+    position: relative;
+    &-empty {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
 
   }
 

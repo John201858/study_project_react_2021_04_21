@@ -63,7 +63,14 @@ p {
   }
 
   &__container {
+    height: 100%;
     overflow-y: auto;
+    &-empty {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
   
 }

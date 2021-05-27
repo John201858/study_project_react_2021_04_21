@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Message from "../Message";
+import { Empty } from "antd";
 
 import {
   SendOutlined,
@@ -35,7 +36,16 @@ export default function MessageList({ user }) {
           <p>{user[0].name}</p>
         </div>
       </div>
-      <div className="messageList__content">{data}</div>
+      <div className="messageList__content">
+        {data || (
+          <div className="messageList__content-empty">
+            <Empty
+              style={{ color: "rgba(71, 84, 102, 0.7)" }}
+              description="Нет сообщений"
+            />
+          </div>
+        )}
+      </div>
       <div className="messageList__input">
         <SmileOutlined className="messageList__input-icon" />
         <textarea
