@@ -17,7 +17,7 @@ $background-color: #ebedf0;
     // width: 349px;
     width: 100%;
     height: 76px;
-    padding: 14px 12px 14px 15px;
+    padding: 14px 15px 14px 15px;
 
     &__avatar {
       position: relative;
@@ -40,7 +40,7 @@ $background-color: #ebedf0;
           height: 12px;
           border-radius: 50%;
           background-color: #2ab476;
-          border: 2px solid $background-color;
+          border: 2px solid #ffffff;
           right: 0;
           bottom: 0;
         }
