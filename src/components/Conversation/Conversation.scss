@@ -81,9 +81,11 @@ $background-color: #ebedf0;
         justify-content: space-between;
         flex-direction: row;
         align-items: center;
+
         p {
           padding-right: 4px;
           max-width: 230px;
+          width: calc(100%);
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;

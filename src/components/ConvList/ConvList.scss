@@ -38,26 +38,25 @@ p {
 
     &-bottom {
       position: relative;
-      margin-top: 15px;
+      margin-top: 22px;
       padding-bottom: 25px;
       display: flex;
       justify-content: center;
       input {
-        padding: 7px 25px 7px 12px;
+        padding: 8px 35px 8px 13px;
         border: 1px solid #DADEE0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0,0,0,0);
+        background-color: rgba(75, 65, 65, 0.05);
         font-size: 14px;
       }
 
       span {
         position: absolute;
         opacity: 0.6;
-        right: 7px;
-        top: 11px;
-        cursor: pointer;
-      }
+        right: 12px;
+        top: 12px;
+       }
 
     }
   }

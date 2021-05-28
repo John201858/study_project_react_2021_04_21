@@ -41,7 +41,7 @@ export default function Conversation({
             </span>
           </div>
           <div className="conversation__data-text">
-            <p>{text}</p>
+            <p>{isMe ? `Вы: ${text}` : `${name}: ${text}`}</p>
             {(isMe && <CheckRead isRead={isRead} />) ||
               (isNewMessageRead && (
                 <span className="conversation__data-text--count">

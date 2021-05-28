@@ -43,7 +43,7 @@ export default function ConvList({ users }) {
           </Button>
         </div>
         <div className="convList__header-bottom">
-          <input onChange={event => filtration(event.target.value)} type="text" placeholder="Поиск..."></input>
+          <input onChange={event => filtration(event.target.value)} type="text" placeholder="Поиск диалогов..."></input>
           <SearchOutlined />
         </div>
       </div>

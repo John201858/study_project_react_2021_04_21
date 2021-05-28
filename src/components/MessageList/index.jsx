@@ -49,7 +49,7 @@ export default function MessageList({ user }) {
       <div className="messageList__input">
         <SmileOutlined className="messageList__input-icon" />
         <textarea
-          rows={change ? "4" : "1"}
+          rows={change ? "3" : "1"}
           onChange={(event) => setChange(event.target.value)}
           placeholder="Введите сообщение..."
         ></textarea>
