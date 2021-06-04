@@ -50,7 +50,13 @@ export default function MessageList({ user }) {
         <SmileOutlined className="messageList__input-icon" />
         <textarea
           rows={change ? "3" : "1"}
-          onChange={(event) => setChange(event.target.value)}
+          onChange={(event) => {
+            event.target.style.height =
+              (event.target.scrollHeight - 40) % 22 === 0
+                ? event.target.scrollHeight + "px"
+                : event.target.scrollHeight - 20 + "px";
+            setChange(event.target.value);
+          }}
           placeholder="Введите сообщение..."
         ></textarea>
         <CameraOutlined className="messageList__input-icon" />
