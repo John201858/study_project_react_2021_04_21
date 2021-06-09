@@ -12,10 +12,11 @@ const timefunc = (date) => {
 };
 
 const Time = ({ date }) => {
-  const [time, setTime] = useState(timefunc(new Date(date)));
+  const dateTypeOf = typeof date === "string" ? new Date(date) : date;
+  const [time, setTime] = useState(timefunc(dateTypeOf));
 
   const interval = setInterval(() => {
-    setTime((time) => (time = timefunc(new Date(date))));
+    setTime((time) => (time = timefunc(dateTypeOf)));
   }, 1000);
 
   useEffect(() => clearInterval(interval));

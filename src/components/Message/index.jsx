@@ -5,7 +5,6 @@ import Time from "../Time";
 import PropTypes from "prop-types";
 
 export default function Message({
-  user,
   avatar,
   name,
   isMe,
@@ -26,7 +25,7 @@ export default function Message({
         </div>
         <div className="message__content">
           <div className="message__content-user">
-            <p>{user.name}</p>
+            <p>{name}</p>
             <span>
               {isMe && <CheckRead isRead={isRead} />}
               <Time date={date} />

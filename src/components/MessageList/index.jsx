@@ -1,6 +1,9 @@
 import { useState } from "react";
+import { connect } from "react-redux";
 import Message from "../Message";
 import { Empty } from "antd";
+import { sendMessage } from "../../store/actionsCreater.js";
+import { nanoid } from "@reduxjs/toolkit";
 
 import {
   SendOutlined,
@@ -10,13 +13,12 @@ import {
 } from "@ant-design/icons";
 import "./MessageList.scss";
 
-export default function MessageList({ user }) {
+function MessageList({ user, dispatch }) {
   const [change, setChange] = useState("");
 
   const data = user.map((user) => (
     <Message
       key={user._id}
-      user={user}
       avatar={user.avatar}
       name={user.name}
       isMe={user.isRead}
@@ -50,6 +52,7 @@ export default function MessageList({ user }) {
         <SmileOutlined className="messageList__input-icon" />
         <textarea
           rows={change ? "3" : "1"}
+          value={change}
           onChange={(event) => {
             event.target.style.height =
               (event.target.scrollHeight - 40) % 22 === 0
@@ -61,7 +64,25 @@ export default function MessageList({ user }) {
         ></textarea>
         <CameraOutlined className="messageList__input-icon" />
         {change ? (
-          <SendOutlined className="messageList__input-icon" />
+          <SendOutlined
+            onClick={() => {
+              dispatch(
+                sendMessage({
+                  _id: nanoid(),
+                  isMe: true,
+                  avatar: "https://loremflickr.com/320/240?random",
+                  name: "Me",
+                  text: change,
+                  date: new Date(),
+                  isRead: true,
+                  isOnline: true
+                })
+              );
+
+              setChange("");
+            }}
+            className="messageList__input-icon"
+          />
         ) : (
           <AudioOutlined className="messageList__input-icon" />
         )}
@@ -69,3 +90,12 @@ export default function MessageList({ user }) {
     </section>
   );
 }
+
+const mapStateToProps = (state) => {
+  console.log(state);
+  return {
+    user: state.message.users
+  };
+};
+
+export default connect(mapStateToProps)(MessageList);
