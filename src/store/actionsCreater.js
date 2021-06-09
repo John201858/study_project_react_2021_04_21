@@ -1,23 +1,10 @@
-import { INCREMENT, DECREMENT } from "./constants";
+import { MESSAGE_SEND } from "./types";
 
-function isRead() {
+function sendMessage(message) {
   return {
-    type: "messageIsRead"
+    type: MESSAGE_SEND,
+    payload: message
   };
 }
 
-function isMe() {
-  return {
-    type: "isMe"
-  };
-}
-
-function increment() {
-  return { type: INCREMENT };
-}
-
-function decrement() {
-  return { type: DECREMENT };
-}
-
-export { isRead, isMe, increment, decrement };
+export { sendMessage };
