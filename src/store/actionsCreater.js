@@ -1,4 +1,4 @@
-import { MESSAGE_SEND } from "./types";
+import { MESSAGE_SEND, MESSAGE_DELETE } from "./types";
 
 function sendMessage(message) {
   return {
@@ -7,4 +7,11 @@ function sendMessage(message) {
   };
 }
 
-export { sendMessage };
+function deleteMessage(id) {
+  return {
+    type: MESSAGE_DELETE,
+    payload: id
+  };
+}
+
+export { sendMessage, deleteMessage };

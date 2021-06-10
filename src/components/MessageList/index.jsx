@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { connect } from "react-redux";
 import Message from "../Message";
 import { Empty } from "antd";
-import { sendMessage } from "../../store/actionsCreater.js";
+import { sendMessage, deleteMessage } from "../../store/actionsCreater.js";
 import { nanoid } from "@reduxjs/toolkit";
 
 import {
@@ -15,9 +15,38 @@ import "./MessageList.scss";
 
 function MessageList({ user, dispatch }) {
   const [change, setChange] = useState("");
+  const [scroll, setScroll] = useState(null);
+  const scrollMessageList = useRef(null);
+
+  useEffect(() => {
+    scrollMessageList.current.scrollTop = scroll;
+  }, [scroll]);
+
+  const send = () => {
+    dispatch(
+      sendMessage({
+        _id: nanoid(),
+        isMe: true,
+        avatar: "https://loremflickr.com/320/240?random",
+        name: "Me",
+        text: change,
+        date: new Date(),
+        isRead: true,
+        isOnline: true
+      })
+    );
+    setScroll(scrollMessageList.current.scrollHeight);
+    setChange("");
+  };
+
+  const refDeleteMessage = (id) => {
+    console.log(id);
+    dispatch(deleteMessage(id));
+  };
 
   const data = user.map((user) => (
     <Message
+      id={user._id}
       key={user._id}
       avatar={user.avatar}
       name={user.name}
@@ -27,6 +56,7 @@ function MessageList({ user, dispatch }) {
       isRead={user.isActive}
       attachmens={user.attachmens}
       isOnline={user.isActive}
+      refDeleteMessage={refDeleteMessage}
     />
   ));
 
@@ -38,7 +68,7 @@ function MessageList({ user, dispatch }) {
           <p>{user[0].name}</p>
         </div>
       </div>
-      <div className="messageList__content">
+      <div ref={scrollMessageList} className="messageList__content">
         {data || (
           <div className="messageList__content-empty">
             <Empty
@@ -64,25 +94,7 @@ function MessageList({ user, dispatch }) {
         ></textarea>
         <CameraOutlined className="messageList__input-icon" />
         {change ? (
-          <SendOutlined
-            onClick={() => {
-              dispatch(
-                sendMessage({
-                  _id: nanoid(),
-                  isMe: true,
-                  avatar: "https://loremflickr.com/320/240?random",
-                  name: "Me",
-                  text: change,
-                  date: new Date(),
-                  isRead: true,
-                  isOnline: true
-                })
-              );
-
-              setChange("");
-            }}
-            className="messageList__input-icon"
-          />
+          <SendOutlined onClick={send} className="messageList__input-icon" />
         ) : (
           <AudioOutlined className="messageList__input-icon" />
         )}

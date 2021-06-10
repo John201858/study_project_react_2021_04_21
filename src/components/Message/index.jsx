@@ -1,10 +1,13 @@
+import { useState } from "react";
 import classNames from "classnames";
 import "./Message.scss";
 import CheckRead from "../CheckRead";
 import Time from "../Time";
 import PropTypes from "prop-types";
+import { DeleteOutlined, EditOutlined, MoreOutlined } from "@ant-design/icons";
 
 export default function Message({
+  id,
   avatar,
   name,
   isMe,
@@ -12,16 +15,39 @@ export default function Message({
   date,
   isRead,
   attachmens,
-  isOnline
+  isOnline,
+  refDeleteMessage
 }) {
+  const [stateMenu, setStateMenu] = useState(false);
+
   return (
     <div className={classNames("message__block", { me: isMe })}>
       <div className={classNames("message", { "message--isMe": isMe })}>
-        <div className="message__avatar">
-          <span
-            className={classNames({ "message__avatar--isOnline": isOnline })}
-          />
-          <img src={avatar} alt={`Avatar ${name}`} />
+        <div className="message__col">
+          <div className="message__col-avatar">
+            <span
+              className={classNames({
+                "message__col-avatar--isOnline": isOnline
+              })}
+            />
+            <img src={avatar} alt={`Avatar ${name}`} />
+          </div>
+          <div className="message__col-icons">
+            <MoreOutlined
+              onClick={() => setStateMenu(!stateMenu)}
+              rotate="90"
+              className="message__col-icons_icon"
+            />
+            {stateMenu && (
+              <>
+                <EditOutlined className="message__col-icons_icon" />
+                <DeleteOutlined
+                  onClick={() => refDeleteMessage(id)}
+                  className="message__col-icons_icon"
+                />
+              </>
+            )}
+          </div>
         </div>
         <div className="message__content">
           <div className="message__content-user">

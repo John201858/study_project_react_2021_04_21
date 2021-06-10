@@ -4,7 +4,7 @@ $primary-color: #0c87b8;
 
 .message__block {
   display: flex;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
   width: 100%;
   min-width: 400px;
 }
@@ -18,28 +18,50 @@ $primary-color: #0c87b8;
   align-items: flex-start;
   $self: &;
 
-  &__avatar {
-    position: relative;
-    margin-left: 10px;
-    margin-right: 10px;
-    img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      overflow: hidden;
-    }
-    &--isOnline {
-      &::before {
-        position: absolute;
-        content: "";
-        display: block;
-        width: 12px;
-        height: 12px;
+  &__col {
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    &-avatar {
+      position: relative;
+      margin-left: 10px;
+      margin-right: 10px;
+      img {
+        width: 50px;
+        height: 50px;
         border-radius: 50%;
-        background-color: #2ab476;
-        border: 2px solid #ffffff;
-        right: 0;
-        bottom: 2px;
+        overflow: hidden;
+      }
+      &--isOnline {
+        &::before {
+          position: absolute;
+          content: "";
+          display: block;
+          width: 12px;
+          height: 12px;
+          border-radius: 50%;
+          background-color: #2ab476;
+          border: 2px solid #ffffff;
+          right: 0;
+          bottom: 2px;
+        }
+      }
+    }
+
+    &-icons {
+      display: flex;
+      flex-direction: column;
+      &_icon {
+        color: rgba(71, 84, 102, 0.6);
+        font-size: 18px;
+        cursor: pointer;
+        transition: 0.2s;
+        padding-bottom: 5px;
+        &:hover {
+          color: rgba(71, 84, 102, 1);
+        }
       }
     }
   }
