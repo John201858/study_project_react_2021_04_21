@@ -12,13 +12,11 @@ export default function messageReducer(state = initialState, action) {
         ...state,
         users: state.users.concat(action.payload)
       };
-    // case MESSAGE_DELETE:
-    //   return {
-    //     ...state,
-    //     users: state.users
-    //       // state.users._id.indexOf(action.payload) > -1 &&
-    //       // state.users.splice(state.users._id.indexOf(action.payload), 1)
-    //   };
+    case MESSAGE_DELETE:
+      return {
+        ...state,
+        users: state.users.filter(n => n._id !== action.payload)
+      };
     default:
       return state;
   }
