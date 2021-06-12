@@ -16,7 +16,8 @@ export default function Message({
   isRead,
   attachmens,
   isOnline,
-  refDeleteMessage
+  refDeleteMessage,
+  refEditMessage
 }) {
   const [stateMenu, setStateMenu] = useState(false);
 
@@ -32,22 +33,27 @@ export default function Message({
             />
             <img src={avatar} alt={`Avatar ${name}`} />
           </div>
-          <div className="message__col-icons">
-            <MoreOutlined
-              onClick={() => setStateMenu(!stateMenu)}
-              rotate="90"
-              className="message__col-icons_icon"
-            />
-            {stateMenu && (
-              <>
-                <EditOutlined className="message__col-icons_icon" />
-                <DeleteOutlined
-                  onClick={() => refDeleteMessage(id)}
-                  className="message__col-icons_icon"
-                />
-              </>
-            )}
-          </div>
+          {isMe && (
+            <div className="message__col-icons">
+              <MoreOutlined
+                className="message__col-icons_icon"
+                onClick={() => setStateMenu(!stateMenu)}
+                rotate="90"
+              />
+              {stateMenu && (
+                <>
+                  <EditOutlined
+                    className="message__col-icons_icon"
+                    onClick={() => refEditMessage({ id, text, attachmens })}
+                  />
+                  <DeleteOutlined
+                    className="message__col-icons_icon"
+                    onClick={() => refDeleteMessage(id)}
+                  />
+                </>
+              )}
+            </div>
+          )}
         </div>
         <div className="message__content">
           <div className="message__content-user">

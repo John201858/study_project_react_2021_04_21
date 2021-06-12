@@ -1,22 +1,36 @@
 import { useState, useRef, useEffect } from "react";
+
 import { connect } from "react-redux";
-import Message from "../Message";
-import { Empty } from "antd";
-import { sendMessage, deleteMessage } from "../../store/actionsCreater.js";
 import { nanoid } from "@reduxjs/toolkit";
+
+import { Empty } from "antd";
+import {
+  sendMessage,
+  deleteMessage,
+  editMessage
+} from "../../store/actionsCreater.js";
 
 import {
   SendOutlined,
   AudioOutlined,
   CameraOutlined,
-  SmileOutlined
+  SmileOutlined,
+  CheckCircleOutlined
 } from "@ant-design/icons";
+
+import Message from "../Message";
 import "./MessageList.scss";
+import autoResizeTexarea from "../../otherFunction/autoResizeTextarea.js";
 
 function MessageList({ user, dispatch }) {
   const [change, setChange] = useState("");
   const [scroll, setScroll] = useState(null);
+  const [checkEventEdit, setCheckEventEdit] = useState({
+    flag: false,
+    id: null
+  });
   const scrollMessageList = useRef(null);
+  const refTextarea = useRef(null);
 
   useEffect(() => {
     scrollMessageList.current.scrollTop = scroll;
@@ -39,9 +53,22 @@ function MessageList({ user, dispatch }) {
     setChange("");
   };
 
+  const editedMessage = () => {
+    change !== ""
+      ? dispatch(editMessage({ id: checkEventEdit.id, text: change }))
+      : dispatch(deleteMessage(checkEventEdit.id));
+    setCheckEventEdit({ flag: false });
+    setChange("");
+  };
+
   const refDeleteMessage = (id) => {
-    console.log(id);
     dispatch(deleteMessage(id));
+  };
+
+  const refEditMessage = (content) => {
+    setChange(content.text);
+    refTextarea.current.select();
+    setCheckEventEdit({ flag: true, id: content.id });
   };
 
   const data = user.map((user) => (
@@ -57,6 +84,7 @@ function MessageList({ user, dispatch }) {
       attachmens={user.attachmens}
       isOnline={user.isActive}
       refDeleteMessage={refDeleteMessage}
+      refEditMessage={refEditMessage}
     />
   ));
 
@@ -81,19 +109,22 @@ function MessageList({ user, dispatch }) {
       <div className="messageList__input">
         <SmileOutlined className="messageList__input-icon" />
         <textarea
-          rows={change ? "3" : "1"}
+          rows="1"
           value={change}
+          ref={refTextarea}
           onChange={(event) => {
-            event.target.style.height =
-              (event.target.scrollHeight - 40) % 22 === 0
-                ? event.target.scrollHeight + "px"
-                : event.target.scrollHeight - 20 + "px";
+            autoResizeTexarea(event);
             setChange(event.target.value);
           }}
           placeholder="Введите сообщение..."
         ></textarea>
         <CameraOutlined className="messageList__input-icon" />
-        {change ? (
+        {checkEventEdit.flag ? (
+          <CheckCircleOutlined
+            onClick={editedMessage}
+            className="messageList__input-icon"
+          />
+        ) : change ? (
           <SendOutlined onClick={send} className="messageList__input-icon" />
         ) : (
           <AudioOutlined className="messageList__input-icon" />
