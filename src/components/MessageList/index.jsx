@@ -36,6 +36,10 @@ function MessageList({ user, dispatch }) {
     scrollMessageList.current.scrollTop = scroll;
   }, [scroll]);
 
+  useEffect(() => {
+    autoResizeTexarea(refTextarea.current);
+  });
+
   const send = () => {
     dispatch(
       sendMessage({
@@ -113,7 +117,6 @@ function MessageList({ user, dispatch }) {
           value={change}
           ref={refTextarea}
           onChange={(event) => {
-            autoResizeTexarea(event);
             setChange(event.target.value);
           }}
           placeholder="Введите сообщение..."
@@ -135,7 +138,6 @@ function MessageList({ user, dispatch }) {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state);
   return {
     user: state.message.users
   };

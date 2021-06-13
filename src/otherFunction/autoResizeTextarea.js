@@ -1,6 +1,6 @@
-const autoResizeTexarea = (event) => {
-  event.target.style.height = "inherit";
-  event.target.style.height = `${event.target.scrollHeight}px`;
+const autoResizeTexarea = (element) => {
+  element.style.height = "inherit";
+  element.style.height = `${element.scrollHeight}px`;
 };
 
 export default autoResizeTexarea;
