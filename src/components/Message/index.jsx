@@ -19,7 +19,7 @@ export default function Message({
   isOnline,
   loading,
   error,
-  blockDeleteMessage,
+  blockEditMessage,
   refDeleteMessage,
   refEditMessage
 }) {
@@ -44,7 +44,7 @@ export default function Message({
                 onClick={() => setStateMenu(!stateMenu)}
                 rotate="90"
               />
-              {stateMenu && (
+              {stateMenu && !blockEditMessage && (
                 <>
                   <Tooltip title="Редактировать" placement="left">
                     <EditOutlined
@@ -52,14 +52,12 @@ export default function Message({
                       onClick={() => refEditMessage({ id, text, attachmens })}
                     />
                   </Tooltip>
-                  {!blockDeleteMessage && (
-                    <Tooltip title="Удалить" placement="left">
-                      <DeleteOutlined
-                        className="message__col-icons_icon"
-                        onClick={() => refDeleteMessage(id)}
-                      />
-                    </Tooltip>
-                  )}
+                  <Tooltip title="Удалить" placement="left">
+                    <DeleteOutlined
+                      className="message__col-icons_icon"
+                      onClick={() => refDeleteMessage(id)}
+                    />
+                  </Tooltip>
                 </>
               )}
             </div>

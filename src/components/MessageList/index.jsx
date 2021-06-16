@@ -89,7 +89,7 @@ function MessageList({ user, status, dispatch }) {
       isOnline={user.isActive}
       loading={user.isActive}
       error={false}
-      blockDeleteMessage={checkEventEdit.flag}
+      blockEditMessage={checkEventEdit.flag}
       refDeleteMessage={refDeleteMessage}
       refEditMessage={refEditMessage}
     />
@@ -104,7 +104,13 @@ function MessageList({ user, status, dispatch }) {
         </div>
       </div>
       <div ref={scrollMessageList} className="messageList__content">
-        {status === "loading" && <Spin className="messageList__content-loading" size="large" tip="Загрузка..."/>}
+        {status === "loading" && (
+          <Spin
+            className="messageList__content-loading"
+            size="large"
+            tip="Загрузка..."
+          />
+        )}
         {data || (
           <div className="messageList__content-empty">
             <Empty
