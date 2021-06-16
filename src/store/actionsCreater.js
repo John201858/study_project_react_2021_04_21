@@ -1,4 +1,4 @@
-import { MESSAGE_SEND, MESSAGE_DELETE, MESSAGE_EDIT } from "./types";
+import { MESSAGE_SEND, MESSAGE_DELETE, MESSAGE_EDIT, MESSAGE_LOADING, MESSAGE_COMPLETED } from "./types";
 
 function sendMessage(message) {
   return {
@@ -21,4 +21,18 @@ function editMessage(content) {
   };
 }
 
-export { sendMessage, deleteMessage, editMessage };
+function messageLoading(status) {
+  return {
+    type: MESSAGE_LOADING,
+    payload: status
+  }
+}
+
+function messageCompleted(obj, status) {
+  return {
+    type: MESSAGE_COMPLETED,
+    payload: {obj, status}
+  }
+}
+
+export { sendMessage, deleteMessage, editMessage, messageLoading, messageCompleted };

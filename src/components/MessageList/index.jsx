@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { connect } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
 
-import { Empty } from "antd";
+import { Empty, Spin } from "antd";
 import {
   sendMessage,
   deleteMessage,
@@ -22,7 +22,7 @@ import Message from "../Message";
 import "./MessageList.scss";
 import autoResizeTexarea from "../../otherFunction/autoResizeTextarea.js";
 
-function MessageList({ user, dispatch }) {
+function MessageList({ user, status, dispatch }) {
   const [change, setChange] = useState("");
   const [scroll, setScroll] = useState(null);
   const [checkEventEdit, setCheckEventEdit] = useState({
@@ -99,11 +99,12 @@ function MessageList({ user, dispatch }) {
     <section className="messageList">
       <div className="messageList__header">
         <div className="messageList__header-user">
-          <img src={user[0].avatar} alt={`Avatar ${user[0].name}`} />
-          <p>{user[0].name}</p>
+          {/* <img src={user && user[0].avatar} alt={`Avatar ${user[0].name}`} />
+          <p>{user && user[0].name}</p> */}
         </div>
       </div>
       <div ref={scrollMessageList} className="messageList__content">
+        {status === "loading" && <Spin className="messageList__content-loading" size="large" tip="Загрузка..."/>}
         {data || (
           <div className="messageList__content-empty">
             <Empty
@@ -142,7 +143,8 @@ function MessageList({ user, dispatch }) {
 
 const mapStateToProps = (state) => {
   return {
-    user: state.message.users
+    user: state.message.users,
+    status: state.message.status
   };
 };
 
