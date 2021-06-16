@@ -4,6 +4,7 @@ import "./Message.scss";
 import CheckRead from "../CheckRead";
 import Time from "../Time";
 import PropTypes from "prop-types";
+import { Tooltip } from "antd";
 import { DeleteOutlined, EditOutlined, MoreOutlined } from "@ant-design/icons";
 
 export default function Message({
@@ -16,6 +17,8 @@ export default function Message({
   isRead,
   attachmens,
   isOnline,
+  loading,
+  blockDeleteMessage,
   refDeleteMessage,
   refEditMessage
 }) {
@@ -42,14 +45,20 @@ export default function Message({
               />
               {stateMenu && (
                 <>
-                  <EditOutlined
-                    className="message__col-icons_icon"
-                    onClick={() => refEditMessage({ id, text, attachmens })}
-                  />
-                  <DeleteOutlined
-                    className="message__col-icons_icon"
-                    onClick={() => refDeleteMessage(id)}
-                  />
+                  <Tooltip title="Редактировать" placement="left">
+                    <EditOutlined
+                      className="message__col-icons_icon"
+                      onClick={() => refEditMessage({ id, text, attachmens })}
+                    />
+                  </Tooltip>
+                  {!blockDeleteMessage && (
+                    <Tooltip title="Удалить" placement="left">
+                      <DeleteOutlined
+                        className="message__col-icons_icon"
+                        onClick={() => refDeleteMessage(id)}
+                      />
+                    </Tooltip>
+                  )}
                 </>
               )}
             </div>
@@ -59,7 +68,7 @@ export default function Message({
           <div className="message__content-user">
             <p>{name}</p>
             <span>
-              {isMe && <CheckRead isRead={isRead} />}
+              {isMe && <CheckRead isRead={isRead} loading={loading} />}
               <Time date={date} />
             </span>
           </div>

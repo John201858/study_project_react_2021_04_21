@@ -87,6 +87,8 @@ function MessageList({ user, dispatch }) {
       isRead={user.isActive}
       attachmens={user.attachmens}
       isOnline={user.isActive}
+      loading={user.isActive}
+      blockDeleteMessage={checkEventEdit.flag}
       refDeleteMessage={refDeleteMessage}
       refEditMessage={refEditMessage}
     />

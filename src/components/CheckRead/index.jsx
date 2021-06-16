@@ -1,9 +1,9 @@
-import { CheckOutlined } from "@ant-design/icons";
+import { CheckOutlined, LoadingOutlined } from "@ant-design/icons";
 import classNames from "classnames";
 import "./CheckRead.scss";
 
-const CheckRead = ({ isRead }) => (
-  <CheckOutlined
+const CheckRead = ({ isRead, loading }) => (
+  loading ? <LoadingOutlined className="loading" /> : <CheckOutlined
     className={classNames("checkOutlined", {"checkOutlined--isRead": isRead})}
   />
 );
