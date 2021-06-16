@@ -18,6 +18,7 @@ export default function Message({
   attachmens,
   isOnline,
   loading,
+  error,
   blockDeleteMessage,
   refDeleteMessage,
   refEditMessage
@@ -68,7 +69,9 @@ export default function Message({
           <div className="message__content-user">
             <p>{name}</p>
             <span>
-              {isMe && <CheckRead isRead={isRead} loading={loading} />}
+              {isMe && (
+                <CheckRead isRead={isRead} loading={loading} error={error} />
+              )}
               <Time date={date} />
             </span>
           </div>
