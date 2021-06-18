@@ -7,9 +7,9 @@ import { store } from "./store/store.js";
 
 import App from "./App";
 
-import { messageLoaded } from "./store/messageReducer.js";
+import { messageListDownload } from "./store/messageReducer.js";
 
-store.dispatch(messageLoaded);
+store.dispatch(messageListDownload);
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
