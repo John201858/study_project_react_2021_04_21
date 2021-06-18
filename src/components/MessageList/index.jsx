@@ -1,14 +1,14 @@
 import { useState, useRef, useEffect } from "react";
 
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
 
 import { Empty, Spin, Skeleton } from "antd";
 import {
-  sendMessage,
   deleteMessage,
-  editMessage
-} from "../../store/actionsCreater.js";
+  editMessage,
+  sendServerMessage
+} from "../../store/messageReducer";
 
 import {
   SendOutlined,
@@ -22,7 +22,7 @@ import Message from "../Message";
 import "./MessageList.scss";
 import autoResizeTexarea from "../../otherFunction/autoResizeTextarea.js";
 
-function MessageList({ user, status, dispatch }) {
+export default function MessageList() {
   const [change, setChange] = useState("");
   const [scroll, setScroll] = useState(null);
   const [checkEventEdit, setCheckEventEdit] = useState({
@@ -31,6 +31,9 @@ function MessageList({ user, status, dispatch }) {
   });
   const scrollMessageList = useRef(null);
   const refTextarea = useRef(null);
+  const items = useSelector((state) => state.message.items);
+  const status = useSelector((state) => state.message.status);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     scrollMessageList.current.scrollTop = scroll;
@@ -41,18 +44,7 @@ function MessageList({ user, status, dispatch }) {
   });
 
   const send = () => {
-    dispatch(
-      sendMessage({
-        _id: nanoid(),
-        isMe: true,
-        avatar: "https://loremflickr.com/320/240?random",
-        name: "Me",
-        text: change,
-        date: new Date(),
-        isRead: true,
-        isOnline: true
-      })
-    );
+    dispatch(sendServerMessage(nanoid(), change, new Date()));
     setScroll(scrollMessageList.current.scrollHeight);
     setChange("");
   };
@@ -75,27 +67,25 @@ function MessageList({ user, status, dispatch }) {
     setCheckEventEdit({ flag: true, id: content.id });
   };
 
-  const data = user.map((user) => (
+  const data = items.map((item) => (
     <Message
-      id={user._id}
-      key={user._id}
-      avatar={user.avatar}
-      name={user.name}
-      isMe={user.isRead}
-      text={user.text}
-      date={user.date}
-      isRead={user.isActive}
-      attachmens={user.attachmens}
-      isOnline={user.isActive}
-      loading={user.isActive}
+      id={item._id}
+      key={item._id}
+      avatar={item.avatar}
+      name={item.name}
+      isMe={item.isRead}
+      text={item.text}
+      date={item.date}
+      isRead={item.isActive}
+      attachmens={item.attachmens}
+      isOnline={item.isActive}
+      loading={item.messageStatus === "loading"}
       error={false}
       blockEditMessage={checkEventEdit.flag}
       refDeleteMessage={refDeleteMessage}
       refEditMessage={refEditMessage}
     />
   ));
-
-  console.log(user);
 
   return (
     <section className="messageList">
@@ -114,8 +104,8 @@ function MessageList({ user, status, dispatch }) {
             </>
           ) : (
             <>
-              <img src={user[0].avatar} alt={`Avatar ${user[0].name}`} />
-              <p>{user[0].name}</p>
+              <img src={items[0].avatar} alt={`Avatar ${items[0].name}`} />
+              <p>{items[0].name}</p>
             </>
           )}
         </div>
@@ -163,12 +153,3 @@ function MessageList({ user, status, dispatch }) {
     </section>
   );
 }
-
-const mapStateToProps = (state) => {
-  return {
-    user: state.message.users,
-    status: state.message.status
-  };
-};
-
-export default connect(mapStateToProps)(MessageList);
