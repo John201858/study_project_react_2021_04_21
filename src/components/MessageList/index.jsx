@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { connect } from "react-redux";
 import { nanoid } from "@reduxjs/toolkit";
 
-import { Empty, Spin } from "antd";
+import { Empty, Spin, Skeleton } from "antd";
 import {
   sendMessage,
   deleteMessage,
@@ -95,12 +95,29 @@ function MessageList({ user, status, dispatch }) {
     />
   ));
 
+  console.log(user);
+
   return (
     <section className="messageList">
       <div className="messageList__header">
         <div className="messageList__header-user">
-          {/* <img src={user && user[0].avatar} alt={`Avatar ${user[0].name}`} />
-          <p>{user && user[0].name}</p> */}
+          {status === "loading" ? (
+            <>
+              <Skeleton.Avatar
+                className="messageList__header-user_sceletAvatar"
+                active
+              />
+              <Skeleton.Input
+                className="messageList__header-user_sceletText"
+                active
+              />
+            </>
+          ) : (
+            <>
+              <img src={user[0].avatar} alt={`Avatar ${user[0].name}`} />
+              <p>{user[0].name}</p>
+            </>
+          )}
         </div>
       </div>
       <div ref={scrollMessageList} className="messageList__content">

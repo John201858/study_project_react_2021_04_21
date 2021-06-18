@@ -37,7 +37,8 @@
       }
     ],
     "greeting": "Hello, undefined! You have 10 unread messages.",
-    "favoriteFruit": "apple"
+    "favoriteFruit": "apple",
+    "messageStatus": ""
   },
   {
     "_id": "6091a18b1ee0536ed07310fc",
@@ -80,7 +81,8 @@
       }
     ],
     "greeting": "Hello, undefined! You have 6 unread messages.",
-    "favoriteFruit": "apple"
+    "favoriteFruit": "apple",
+    "messageStatus": ""
   },
   {
     "_id": "6091a18ba99011fd0eb13573",
@@ -119,7 +121,8 @@
       }
     ],
     "greeting": "Hello, undefined! You have 8 unread messages.",
-    "favoriteFruit": "strawberry"
+    "favoriteFruit": "strawberry",
+    "messageStatus": ""
   },
   {
     "_id": "6091a18b2701527f8ff1a75d",
@@ -158,7 +161,8 @@
       }
     ],
     "greeting": "Hello, undefined! You have 6 unread messages.",
-    "favoriteFruit": "apple"
+    "favoriteFruit": "apple",
+    "messageStatus": ""
   },
   {
     "_id": "6091a18b3d4b565c3ad2cb8f",
@@ -197,7 +201,8 @@
       }
     ],
     "greeting": "Hello, undefined! You have 7 unread messages.",
-    "favoriteFruit": "strawberry"
+    "favoriteFruit": "strawberry",
+    "messageStatus": ""
   },
   {
     "_id": "6091a18ba60e5042370b1404",
@@ -236,7 +241,8 @@
       }
     ],
     "greeting": "Hello, undefined! You have 8 unread messages.",
-    "favoriteFruit": "apple"
+    "favoriteFruit": "apple",
+    "messageStatus": ""
   },
   {
     "_id": "6091a18b4c30f5d1d986954e",
@@ -275,7 +281,8 @@
       }
     ],
     "greeting": "Hello, undefined! You have 5 unread messages.",
-    "favoriteFruit": "strawberry"
+    "favoriteFruit": "strawberry",
+    "messageStatus": ""
   },
   {
     "_id": "6091a18b79dac869a828fdc5",
@@ -314,7 +321,8 @@
       }
     ],
     "greeting": "Hello, undefined! You have 6 unread messages.",
-    "favoriteFruit": "strawberry"
+    "favoriteFruit": "strawberry",
+    "messageStatus": ""
   },
   {
     "_id": "6091a18bccb64a06bcaf5cf4",
@@ -353,7 +361,8 @@
       }
     ],
     "greeting": "Hello, undefined! You have 8 unread messages.",
-    "favoriteFruit": "strawberry"
+    "favoriteFruit": "strawberry",
+    "messageStatus": ""
   },
   {
     "_id": "6091a18b358a6c910bf13697",
@@ -392,7 +401,8 @@
       }
     ],
     "greeting": "Hello, undefined! You have 6 unread messages.",
-    "favoriteFruit": "apple"
+    "favoriteFruit": "apple",
+    "messageStatus": ""
   },
   {
     "_id": "6091a18b3a71fe5a500bda0e",
@@ -431,7 +441,8 @@
       }
     ],
     "greeting": "Hello, undefined! You have 5 unread messages.",
-    "favoriteFruit": "strawberry"
+    "favoriteFruit": "strawberry",
+    "messageStatus": ""
   },
   {
     "_id": "6091a18b75d66ed186a9dd73",
@@ -470,7 +481,8 @@
       }
     ],
     "greeting": "Hello, undefined! You have 6 unread messages.",
-    "favoriteFruit": "banana"
+    "favoriteFruit": "banana",
+    "messageStatus": ""
   },
   {
     "_id": "6091a18b66ff5ec24155e8a3",
@@ -509,7 +521,8 @@
       }
     ],
     "greeting": "Hello, undefined! You have 8 unread messages.",
-    "favoriteFruit": "strawberry"
+    "favoriteFruit": "strawberry",
+    "messageStatus": ""
   },
   {
     "_id": "6091a18ba3fe12af41d9b0b9",
@@ -548,7 +561,8 @@
       }
     ],
     "greeting": "Hello, undefined! You have 10 unread messages.",
-    "favoriteFruit": "strawberry"
+    "favoriteFruit": "strawberry",
+    "messageStatus": ""
   },
   {
     "_id": "6091a18b5dc62262c1d6c880",
@@ -587,7 +601,8 @@
       }
     ],
     "greeting": "Hello, undefined! You have 5 unread messages.",
-    "favoriteFruit": "strawberry"
+    "favoriteFruit": "strawberry",
+    "messageStatus": ""
   },
   {
     "_id": "6091a18b773b2019ff188409",
@@ -626,7 +641,8 @@
       }
     ],
     "greeting": "Hello, undefined! You have 5 unread messages.",
-    "favoriteFruit": "strawberry"
+    "favoriteFruit": "strawberry",
+    "messageStatus": ""
   },
   {
     "_id": "6091a18bd899057e3ae9dd16",
@@ -665,7 +681,8 @@
       }
     ],
     "greeting": "Hello, undefined! You have 9 unread messages.",
-    "favoriteFruit": "apple"
+    "favoriteFruit": "apple",
+    "messageStatus": ""
   },
   {
     "_id": "6091a18b978b299285c794a8",
@@ -704,6 +721,7 @@
       }
     ],
     "greeting": "Hello, undefined! You have 9 unread messages.",
-    "favoriteFruit": "apple"
+    "favoriteFruit": "apple",
+    "messageStatus": ""
   }
 ]
