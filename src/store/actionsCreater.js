@@ -1,4 +1,10 @@
-import { MESSAGE_SEND, MESSAGE_DELETE, MESSAGE_EDIT, MESSAGE_LOADING, MESSAGE_COMPLETED } from "./types";
+import {
+  MESSAGE_SEND,
+  MESSAGE_DELETE,
+  MESSAGE_EDIT,
+  MESSAGE_LIST_LOADING,
+  MESSAGE_LIST_COMPLETED
+} from "./types";
 
 function sendMessage(message) {
   return {
@@ -21,18 +27,24 @@ function editMessage(content) {
   };
 }
 
-function messageLoading(status) {
+function messageListLoading(status) {
   return {
-    type: MESSAGE_LOADING,
+    type: MESSAGE_LIST_LOADING,
     payload: status
-  }
+  };
 }
 
-function messageCompleted(obj, status) {
+function messageListCompleted(obj, status) {
   return {
-    type: MESSAGE_COMPLETED,
-    payload: {obj, status}
-  }
+    type: MESSAGE_LIST_COMPLETED,
+    payload: { obj, status }
+  };
 }
 
-export { sendMessage, deleteMessage, editMessage, messageLoading, messageCompleted };
+export {
+  sendMessage,
+  deleteMessage,
+  editMessage,
+  messageListLoading,
+  messageListCompleted
+};

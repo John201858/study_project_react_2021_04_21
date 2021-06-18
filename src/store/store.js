@@ -1,11 +1,8 @@
-import { createStore, applyMiddleware} from "redux";
-import thunkMiddleware from 'redux-thunk';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import { rootReducer } from "./rootReducer";
+import { configureStore } from "@reduxjs/toolkit";
+import messageReducer from "./messageReducer.js";
 
-const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware));
-
-export const store = createStore(
-  rootReducer,
-  composedEnhancer
-);
+export const store = configureStore({
+  reducer: {
+    message: messageReducer
+  }
+});
