@@ -1,25 +1,38 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
 
 import users from "../../../users.json";
-// import { MESSAGE_SEND, MESSAGE_DELETE, MESSAGE_EDIT, MESSAGE_LIST_LOADING, MESSAGE_LIST_COMPLETED } from "./types";
-
-// import { messageListLoading, messageListCompleted } from "./actionsCreater";
 
 const initialState = {
-  items: users
-  // status: ""
+  items: [],
+  status: ""
 };
 
 const messageReducer = createSlice({
   name: "message",
   initialState,
   reducers: {
-    sendMessage(state, action) {
-      state.items.concat(action.payload);
+    sendMessage: {
+      reducer(state, action) {
+        state.items = state.items.concat(action.payload);
+      },
+      prepare(id, text, date) {
+        return {
+          payload: {
+            _id: id,
+            isMe: true,
+            avatar: "https://loremflickr.com/320/240?random",
+            name: "Me",
+            text,
+            date,
+            isRead: true,
+            isOnline: true
+          }
+        };
+      }
     },
     deleteMessage(state, action) {
       const id = action.payload;
-      state.items.filter((message) => message._id !== id);
+      state.items = state.items.filter((message) => message._id !== id);
     },
     editMessage(state, action) {
       const { id, text } = action.payload;
@@ -29,76 +42,73 @@ const messageReducer = createSlice({
         }
         return message;
       });
-    }
-    // messageListLoading(state, action) {
-    //   state.status = action.payload;
+    },
+    // extraRedusers: builder => {
+    //   builder
+    //     .addCase(messageList.download, (state, action) => {
+    //       state.status = 'loading';
+    //     })
+    //     .addCase(messageList.fulfilled, (state, action) => {
+    //       const message = action.payload;
+    //       state.status = 'fulfilled';
+    //       state.items = message;
+    //     })
     // },
-    // messageListCompleted: {
-    //   reduser (state, action) {
-    //     const {messages, status} = action.payload;
-    //     state.items = messages;
-    //     state.status = status;
-    //   },
-    //   prepare(messages, status) {
-    //     return {
-    //       payload: {messages, status}
-    //     }
-    //   }
-    // }
+    messageListLoading(state, action) {
+      state.status = "loading";
+    },
+    messageListCompleted(state, action) {
+      state.items = action.payload;
+      state.status = "fulfilled";
+    },
+    messageLoading(state, action) {
+      state.items = state.items.map((message) => {
+        if (message._id === action.payload) {
+          message.messageStatus = "loading";
+        }
+        return message;
+      });
+    },
+    messageCompleted(state, action) {
+      state.items = state.items.map((message) => {
+        if (message._id === action.payload) {
+          message.messageStatus = "fulfilled";
+        }
+        return message;
+      });
+    }
   }
 });
 
-// export default function messageReducer(state = initialState, action) {
-//   switch (action.type) {
-//     case MESSAGE_SEND:
-//       return {
-//         ...state,
-//         items: state.items.concat(action.payload)
-//       };
-//     case MESSAGE_DELETE:
-//       return {
-//         ...state,
-//         items: state.items.filter(message => message._id !== action.payload)
-//       };
-//     case MESSAGE_EDIT:
-//       return {
-//         ...state,
-//         items: state.items.map(message => {
-//           if (message._id === action.payload.id) {
-//             message.text = action.payload.text
-//           }
-//           return message
-//         })
-//       }
-//     case MESSAGE_LIST_LOADING:
-//       return {
-//         ...state,
-//         status: action.payload
-//       }
-//     case MESSAGE_LIST_COMPLETED:
-//       return {
-//         ...state,
-//         items: action.payload.obj,
-//         status: action.payload.status
-//       }
-//     default:
-//       return state;
-//   }
-// }
+export function messageListDownload(dispatch, getState) {
+  dispatch(messageListLoading());
+  setTimeout(() => {
+    dispatch(messageListCompleted(users));
+  }, 5000);
+}
 
-// export function messageListDownload(dispatch, getState) {
-//   dispatch(messageListLoading("loading"));
-//   setInterval(() => {
-//     dispatch(messageListCompleted(users, "loaded"));
+export const sendServerMessage = (id, text, date) => (dispatch, getState) => {
+  dispatch(sendMessage(id, text, date));
+  dispatch(messageLoading(id));
+  setTimeout(() => {
+    dispatch(messageCompleted(id));
+  }, 5000);
+};
+
+// export const messageList = createAsyncThunk("messages/list", (message) => {
+//   setTimeout(() => {
+//     return message;
 //   }, 5000);
-// }
+// });
 
 export const {
   sendMessage,
   deleteMessage,
   editMessage,
   messageListLoading,
-  messageListCompleted
+  messageListCompleted,
+  messageLoading,
+  messageCompleted
 } = messageReducer.actions;
 
 export default messageReducer.reducer;

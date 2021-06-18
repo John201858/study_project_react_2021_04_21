@@ -9,7 +9,7 @@ import App from "./App";
 
 import { messageListDownload } from "./store/messageReducer.js";
 
-// store.dispatch(messageListDownload);
+store.dispatch(messageListDownload);
 
 const rootElement = document.getElementById("root");
 ReactDOM.render(
