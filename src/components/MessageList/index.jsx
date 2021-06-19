@@ -7,7 +7,8 @@ import { Empty, Spin, Skeleton } from "antd";
 import {
   deleteMessage,
   editMessage,
-  sendServerMessage
+  sendServerMessage,
+  messageListDownload
 } from "../../store/messageReducer";
 
 import {
@@ -43,8 +44,14 @@ export default function MessageList() {
     autoResizeTexarea(refTextarea.current);
   });
 
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(messageListDownload);
+    }
+  }, [status, dispatch]);
+
   const send = () => {
-    dispatch(sendServerMessage(nanoid(), change, new Date()));
+    dispatch(sendServerMessage(nanoid(), change));
     setScroll(scrollMessageList.current.scrollHeight);
     setChange("");
   };
@@ -91,7 +98,7 @@ export default function MessageList() {
     <section className="messageList">
       <div className="messageList__header">
         <div className="messageList__header-user">
-          {status === "loading" ? (
+          {(status === "loading") || (status === "idle") ? (
             <>
               <Skeleton.Avatar
                 className="messageList__header-user_sceletAvatar"

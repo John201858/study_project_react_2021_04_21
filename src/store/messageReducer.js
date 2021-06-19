@@ -4,7 +4,7 @@ import users from "../../../users.json";
 
 const initialState = {
   items: [],
-  status: ""
+  status: "idle"
 };
 
 const messageReducer = createSlice({
@@ -13,9 +13,9 @@ const messageReducer = createSlice({
   reducers: {
     sendMessage: {
       reducer(state, action) {
-        state.items = state.items.concat(action.payload);
+        state.items.push(action.payload);
       },
-      prepare(id, text, date) {
+      prepare(id, text) {
         return {
           payload: {
             _id: id,
@@ -23,7 +23,7 @@ const messageReducer = createSlice({
             avatar: "https://loremflickr.com/320/240?random",
             name: "Me",
             text,
-            date,
+            date: new Date(),
             isRead: true,
             isOnline: true
           }

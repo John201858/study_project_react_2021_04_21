@@ -7,10 +7,6 @@ import { store } from "./store/store.js";
 
 import App from "./App";
 
-import { messageListDownload } from "./store/messageReducer.js";
-
-store.dispatch(messageListDownload);
-
 const rootElement = document.getElementById("root");
 ReactDOM.render(
   // <StrictMode>
