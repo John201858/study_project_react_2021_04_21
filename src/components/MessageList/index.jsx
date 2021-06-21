@@ -69,36 +69,39 @@ export default function MessageList() {
   };
 
   const refEditMessage = (content) => {
-    setChange(content.text);
+    const { id, text } = content;
+    setChange(text);
     refTextarea.current.select();
-    setCheckEventEdit({ flag: true, id: content.id });
+    setCheckEventEdit({ flag: true, id });
   };
 
-  const data = items.map((item) => (
-    <Message
-      id={item._id}
-      key={item._id}
-      avatar={item.avatar}
-      name={item.name}
-      isMe={item.isRead}
-      text={item.text}
-      date={item.date}
-      isRead={item.isActive}
-      attachmens={item.attachmens}
-      isOnline={item.isActive}
-      loading={item.messageStatus === "loading"}
-      error={false}
-      blockEditMessage={checkEventEdit.flag}
-      refDeleteMessage={refDeleteMessage}
-      refEditMessage={refEditMessage}
-    />
-  ));
+  const data =
+    items &&
+    items.map((item) => (
+      <Message
+        id={item._id}
+        key={item._id}
+        avatar={item.avatar}
+        name={item.name}
+        isMe={item.isRead}
+        text={item.text}
+        date={item.date}
+        isRead={item.isActive}
+        attachmens={item.attachmens}
+        isOnline={item.isActive}
+        loading={item.messageStatus === "loading"}
+        error={false}
+        blockEditMessage={checkEventEdit.flag}
+        refDeleteMessage={refDeleteMessage}
+        refEditMessage={refEditMessage}
+      />
+    ));
 
   return (
     <section className="messageList">
       <div className="messageList__header">
         <div className="messageList__header-user">
-          {(status === "loading") || (status === "idle") ? (
+          {!items ? (
             <>
               <Skeleton.Avatar
                 className="messageList__header-user_sceletAvatar"

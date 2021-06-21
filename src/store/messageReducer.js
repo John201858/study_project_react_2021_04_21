@@ -3,7 +3,7 @@ import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
 import users from "../../../users.json";
 
 const initialState = {
-  items: [],
+  items: null,
   status: "idle"
 };
 
@@ -36,12 +36,10 @@ const messageReducer = createSlice({
     },
     editMessage(state, action) {
       const { id, text } = action.payload;
-      state.items = state.items.map((message) => {
-        if (message._id === id) {
-          message.text = text;
-        }
-        return message;
-      });
+      const message = state.items.find((message) => message._id === id);
+      if (message) {
+        message.text = text;
+      }
     },
     // extraRedusers: builder => {
     //   builder
@@ -62,20 +60,20 @@ const messageReducer = createSlice({
       state.status = "fulfilled";
     },
     messageLoading(state, action) {
-      state.items = state.items.map((message) => {
-        if (message._id === action.payload) {
-          message.messageStatus = "loading";
-        }
-        return message;
-      });
+      const message = state.items.find(
+        (message) => message._id === action.payload
+      );
+      if (message) {
+        message.messageStatus = "loading";
+      }
     },
     messageCompleted(state, action) {
-      state.items = state.items.map((message) => {
-        if (message._id === action.payload) {
-          message.messageStatus = "fulfilled";
-        }
-        return message;
-      });
+      const message = state.items.find(
+        (message) => message._id === action.payload
+      );
+      if (message) {
+        message.messageStatus = "fulfilled";
+      }
     }
   }
 });
