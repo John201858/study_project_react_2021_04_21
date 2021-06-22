@@ -20,18 +20,22 @@ import {
 } from "@ant-design/icons";
 
 import Message from "../Message";
+import FileUpload from "../FileUpload";
+
 import "./MessageList.scss";
 import autoResizeTexarea from "../../otherFunction/autoResizeTextarea.js";
 
 export default function MessageList() {
   const [change, setChange] = useState("");
   const [scroll, setScroll] = useState(null);
+  const [files, setFiles] = useState();
   const [checkEventEdit, setCheckEventEdit] = useState({
     flag: false,
     id: null
   });
   const scrollMessageList = useRef(null);
   const refTextarea = useRef(null);
+  const refUploadFiles = useRef(null);
   const items = useSelector((state) => state.message.items);
   const status = useSelector((state) => state.message.status);
   const dispatch = useDispatch();
@@ -49,6 +53,20 @@ export default function MessageList() {
       dispatch(messageListDownload);
     }
   }, [status, dispatch]);
+
+  const updateUploadedFiles = (file) => {
+    setFiles(file);
+  };
+
+  const refInputFile = (element) => {
+    element.click();
+  }
+
+
+  const sendFuncUploadFiles = () => {
+    refUploadFiles.current.click();
+    // refUploadFiles.current.props.functionAction = functionAction;
+  }
 
   const send = () => {
     dispatch(sendServerMessage(nanoid(), change));
@@ -148,7 +166,7 @@ export default function MessageList() {
           }}
           placeholder="Введите сообщение..."
         ></textarea>
-        <CameraOutlined className="messageList__input-icon" />
+       
         {checkEventEdit.flag ? (
           <CheckCircleOutlined
             onClick={editedMessage}
@@ -160,6 +178,12 @@ export default function MessageList() {
           <AudioOutlined className="messageList__input-icon" />
         )}
       </div>
+      <FileUpload 
+        accept=".jpg,.png,.jpeg"
+        label="Profile Image(s)"
+        multiple
+        updateFilesCb={updateUploadedFiles} 
+      />
     </section>
   );
 }

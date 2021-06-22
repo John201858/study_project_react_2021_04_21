@@ -1,4 +1,7 @@
 import { useState, useRef } from "react";
+
+import { CameraOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
+
 import "./FileUpload.scss";
 
 const DEFAULT_MAX_FILE_SIZE_IN_BYTES = 500000;
@@ -12,6 +15,7 @@ const convertBytesToKB = (bytes) => Math.round(bytes / KILO_BYTES_PER_BYTE);
 const FileUpload = ({
   label,
   updateFilesCb,
+  icon,
   maxFileSizeInBytes = DEFAULT_MAX_FILE_SIZE_IN_BYTES,
   ...otherProps
 }) => {
@@ -56,56 +60,52 @@ const FileUpload = ({
 
   return (
     <>
-      <section className="fileUploadContainer">
-        <label className="inputLabel">{label}</label>
-        {/* <p className="dragDropText">Drag and drop your files anywhere or</p> */}
-        {/* <button onClick={handleUploadBtnClick} className="uploadFileBtn" type="button"> */}
-        <i onClick={handleUploadBtnClick} className="fas fa-file-upload" />
-        {/* <span> Загрузить {otherProps.multiple ? "Файлы" : "Файл"}</span> */}
-        {/* </button> */}
-        <input
-          className="formField"
-          type="file"
-          ref={fileInputField}
-          title=""
-          value=""
-          onChange={handleNewFileUpload}
-          {...otherProps}
-        />
-      </section>
+      <CameraOutlined onClick={handleUploadBtnClick} className="icon" />
+      <input
+        className="formField"
+        type="file"
+        ref={fileInputField}
+        title=""
+        value=""
+        onChange={handleNewFileUpload}
+        {...otherProps}
+      />
 
-      <article className="filePreviewContainer">
-        {/* <span>Загружать</span> */}
-        <section className="previewList">
-          {Object.keys(files).map((fileName, index) => {
-            let file = files[fileName];
-            let isImageFile = file.type.split("/")[0] === "image";
-            return (
-              <section className="previewContainer" key={fileName}>
-                <div>
-                  {isImageFile && (
-                    <img
-                      className="imagePreview"
-                      src={URL.createObjectURL(file)}
-                      alt={`file preview ${index}`}
-                    />
-                  )}
-                  <div className="fileMetaData" isImageFile={isImageFile}>
-                    <span>{file.name}</span>
-                    <aside>
-                      <span>{convertBytesToKB(file.size)} kb</span>
-                      <i
-                        onClick={() => removeFile(fileName)}
-                        className="fas fa-trash-alt removeFileIcon"
-                      />
-                    </aside>
-                  </div>
-                </div>
-              </section>
-            );
-          })}
-        </section>
-      </article>
+      <section className="previewList">
+        {Object.keys(files).map((fileName, index) => {
+          let file = files[fileName];
+          let isImageFile = file.type.split("/")[0] === "image";
+          return (
+            <div className="previewList__element" key={fileName}>
+              {isImageFile && (
+                <img
+                  className="previewList__element-image"
+                  src={URL.createObjectURL(file)}
+                  alt={`file preview ${index}`}
+                />
+              )}
+              <div
+                className="previewList__element-fileMetaData"
+                isImageFile={isImageFile}
+              >
+                <p>{file.name}</p>
+                <span>{convertBytesToKB(file.size)} kb</span>
+              </div>
+              <div className="previewList__element-icon">
+                {/* <i
+                    onClick={() => removeFile(fileName)}
+                    className="fas fa-trash-alt removeFileIcon"
+                  /> */}
+                <EyeOutlined className="previewList__element-icon_eyeOutLined" />
+                <DeleteOutlined
+                  className="previewList__element-icon_deleteOutlined"
+                  onClick={() => removeFile(fileName)}
+                />
+              </div>
+            </div>
+          );
+        })}
+      </section>
     </>
   );
 };
