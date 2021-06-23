@@ -33,12 +33,14 @@ export default function MessageList() {
     flag: false,
     id: null
   });
+  const [attachmens, setAttachmens] = useState(null);
   const scrollMessageList = useRef(null);
   const refTextarea = useRef(null);
-  const refUploadFiles = useRef(null);
   const items = useSelector((state) => state.message.items);
   const status = useSelector((state) => state.message.status);
   const dispatch = useDispatch();
+
+  console.log(files);
 
   useEffect(() => {
     scrollMessageList.current.scrollTop = scroll;
@@ -54,22 +56,19 @@ export default function MessageList() {
     }
   }, [status, dispatch]);
 
+  const getContentBox = (content) => {
+    setAttachmens(content);
+    console.log(content);
+  }
+
   const updateUploadedFiles = (file) => {
     setFiles(file);
   };
 
-  const refInputFile = (element) => {
-    element.click();
-  }
-
-
-  const sendFuncUploadFiles = () => {
-    refUploadFiles.current.click();
-    // refUploadFiles.current.props.functionAction = functionAction;
-  }
-
   const send = () => {
-    dispatch(sendServerMessage(nanoid(), change));
+    const filesURL = files.map((file) => URL.createObjectURL(file));
+
+    dispatch(sendServerMessage(nanoid(), change, filesURL));
     setScroll(scrollMessageList.current.scrollHeight);
     setChange("");
   };
@@ -166,7 +165,13 @@ export default function MessageList() {
           }}
           placeholder="Введите сообщение..."
         ></textarea>
-       
+        <FileUpload
+          accept=".jpg,.png,.jpeg"
+          label="Profile Image(s)"
+          multiple
+          updateFilesCb={updateUploadedFiles}
+          getContentBox={getContentBox}
+        />
         {checkEventEdit.flag ? (
           <CheckCircleOutlined
             onClick={editedMessage}
@@ -178,12 +183,7 @@ export default function MessageList() {
           <AudioOutlined className="messageList__input-icon" />
         )}
       </div>
-      <FileUpload 
-        accept=".jpg,.png,.jpeg"
-        label="Profile Image(s)"
-        multiple
-        updateFilesCb={updateUploadedFiles} 
-      />
+      {attachmens}
     </section>
   );
 }

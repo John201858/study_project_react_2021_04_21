@@ -14,6 +14,7 @@ const FileUpload = ({
   label,
   updateFilesCb,
   icon,
+  getContentBox,
   maxFileSizeInBytes = DEFAULT_MAX_FILE_SIZE_IN_BYTES,
   ...otherProps
 }) => {
@@ -23,6 +24,7 @@ const FileUpload = ({
 
   const handleUploadBtnClick = () => {
     fileInputField.current.click();
+    return getContentBox(contentBox);
   };
 
   const addNewFiles = (newFiles) => {
@@ -57,6 +59,24 @@ const FileUpload = ({
     callUpdateFilesCb({ ...files });
   };
 
+  const contentBox = (
+    <section className="previewList">
+      {Object.keys(files).map((fileName, index) => {
+        let file = files[fileName];
+        let isImageFile = file.type.split("/")[0] === "image";
+        return (
+          <Attachmens
+            file={file}
+            fileName={fileName}
+            isImageFile={isImageFile}
+            removeFile={removeFile}
+            index={index}
+          />
+        );
+      })}
+    </section>
+  );
+
   return (
     <>
       <CameraOutlined onClick={handleUploadBtnClick} className="icon" />
@@ -69,22 +89,6 @@ const FileUpload = ({
         onChange={handleNewFileUpload}
         {...otherProps}
       />
-
-      <section className="previewList">
-        {Object.keys(files).map((fileName, index) => {
-          let file = files[fileName];
-          let isImageFile = file.type.split("/")[0] === "image";
-          return (
-            <Attachmens
-              file={file}
-              fileName={fileName}
-              isImageFile={isImageFile}
-              removeFile={removeFile}
-              index={index}
-            />
-          );
-        })}
-      </section>
     </>
   );
 };

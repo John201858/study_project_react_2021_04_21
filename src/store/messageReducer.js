@@ -15,7 +15,7 @@ const messageReducer = createSlice({
       reducer(state, action) {
         state.items.push(action.payload);
       },
-      prepare(id, text) {
+      prepare(id, text, attachmens) {
         return {
           payload: {
             _id: id,
@@ -23,6 +23,7 @@ const messageReducer = createSlice({
             avatar: "https://loremflickr.com/320/240?random",
             name: "Me",
             text,
+            attachmens,
             date: new Date(),
             isRead: true,
             isOnline: true
@@ -85,8 +86,8 @@ export function messageListDownload(dispatch, getState) {
   }, 5000);
 }
 
-export const sendServerMessage = (id, text, date) => (dispatch, getState) => {
-  dispatch(sendMessage(id, text, date));
+export const sendServerMessage = (id, text, attachmens) => (dispatch, getState) => {
+  dispatch(sendMessage(id, text, attachmens));
   dispatch(messageLoading(id));
   setTimeout(() => {
     dispatch(messageCompleted(id));
