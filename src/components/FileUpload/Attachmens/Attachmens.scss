@@ -1,0 +1,66 @@
+.attachmens {
+  margin: 5px 5px 5px 0;
+  position: relative;
+  width: 100px;
+  $self: &;
+  
+  &__image {
+    width: 100px;
+    height: 100px;
+    overflow: hidden;
+    border-radius: 5px;
+  }
+  &__fileMetaData {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 7px 5px 5px 5px;
+    width: 100px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(5, 5, 5, 0.55);
+    border-radius: 5px;
+    p {
+      // width: 100%;
+      color: #fff;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    span {
+      color: #fff;
+    }
+  }
+  &__icon {
+    position: absolute;
+    display: none;
+    bottom: 25%;
+    right: 30%;
+    color: #fff;
+    // padding-right: 8px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: 0.2s;
+    
+    &-eyeOutLined {
+      padding-right: 3px;
+      transition: 0.2s;
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+    &-deleteOutlined {
+      padding-left: 3px;
+      transition: 0.2s;
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+  }
+  &:hover {
+    #{$self}__icon {
+      display: flex;
+    }
+  }
+}

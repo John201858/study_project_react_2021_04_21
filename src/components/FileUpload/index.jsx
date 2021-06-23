@@ -1,16 +1,14 @@
 import { useState, useRef } from "react";
 
-import { CameraOutlined, DeleteOutlined, EyeOutlined } from "@ant-design/icons";
+import { CameraOutlined } from "@ant-design/icons";
 
+import Attachmens from "./Attachmens";
 import "./FileUpload.scss";
 
 const DEFAULT_MAX_FILE_SIZE_IN_BYTES = 500000;
-const KILO_BYTES_PER_BYTE = 1000;
 
 const convertNestedObjectToArray = (nestedObj) =>
   Object.keys(nestedObj).map((key) => nestedObj[key]);
-
-const convertBytesToKB = (bytes) => Math.round(bytes / KILO_BYTES_PER_BYTE);
 
 const FileUpload = ({
   label,
@@ -20,6 +18,7 @@ const FileUpload = ({
   ...otherProps
 }) => {
   const [files, setFiles] = useState({});
+
   const fileInputField = useRef(null);
 
   const handleUploadBtnClick = () => {
@@ -76,33 +75,13 @@ const FileUpload = ({
           let file = files[fileName];
           let isImageFile = file.type.split("/")[0] === "image";
           return (
-            <div className="previewList__element" key={fileName}>
-              {isImageFile && (
-                <img
-                  className="previewList__element-image"
-                  src={URL.createObjectURL(file)}
-                  alt={`file preview ${index}`}
-                />
-              )}
-              <div
-                className="previewList__element-fileMetaData"
-                isImageFile={isImageFile}
-              >
-                <p>{file.name}</p>
-                <span>{convertBytesToKB(file.size)} kb</span>
-              </div>
-              <div className="previewList__element-icon">
-                {/* <i
-                    onClick={() => removeFile(fileName)}
-                    className="fas fa-trash-alt removeFileIcon"
-                  /> */}
-                <EyeOutlined className="previewList__element-icon_eyeOutLined" />
-                <DeleteOutlined
-                  className="previewList__element-icon_deleteOutlined"
-                  onClick={() => removeFile(fileName)}
-                />
-              </div>
-            </div>
+            <Attachmens
+              file={file}
+              fileName={fileName}
+              isImageFile={isImageFile}
+              removeFile={removeFile}
+              index={index}
+            />
           );
         })}
       </section>
