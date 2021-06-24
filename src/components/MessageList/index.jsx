@@ -19,6 +19,9 @@ import {
   CheckCircleOutlined
 } from "@ant-design/icons";
 
+import "emoji-mart/css/emoji-mart.css";
+import { Picker, Emoji } from "emoji-mart";
+
 import Message from "../Message";
 import FileUpload from "../FileUpload";
 
@@ -34,6 +37,7 @@ export default function MessageList() {
     id: null
   });
   const [attachmens, setAttachmens] = useState(null);
+  const [emojiView, setEmojiView] = useState(false);
   const scrollMessageList = useRef(null);
   const refTextarea = useRef(null);
   const items = useSelector((state) => state.message.items);
@@ -113,6 +117,7 @@ export default function MessageList() {
         refEditMessage={refEditMessage}
       />
     ));
+    console.log(<Picker/>);
 
   return (
     <section className="messageList">
@@ -155,7 +160,20 @@ export default function MessageList() {
         )}
       </div>
       <div className="messageList__input">
-        <SmileOutlined className="messageList__input-icon" />
+        <SmileOutlined 
+          onClick={() => setEmojiView(!emojiView)}
+          className="messageList__input-icon" 
+        />
+        {emojiView && <Picker 
+            style={{
+              position: "absolute", 
+              bottom: "65px",
+              left: "20px"
+            }} 
+            sheetSize="32"
+            onClick={() => setEmojiView(false)}
+          />
+        }
         <textarea
           rows="1"
           value={change}
