@@ -17,14 +17,14 @@ const conversationReducer = createSlice({
     conversationListCompleted(state, action) {
       state.items = action.payload;
       state.status = "fulfilled";
-    },
-    selectConversationId(state, action) {
-      const conversationId = state.items.find(
-        (item) => item._id === action.payload
-      );
-      if (conversationId) {
-      }
     }
+    // selectConversationId(state, action) {
+    //   const conversationId = state.items.find(
+    //     (item) => item._id === action.payload
+    //   );
+    //   if (conversationId) {
+    //   }
+    // }
   }
 });
 
