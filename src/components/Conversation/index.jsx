@@ -5,7 +5,7 @@ import "./Conversation.scss";
 import classNames from "classnames";
 
 export default function Conversation({
-  user,
+  item,
   selection,
   date,
   isMe,
@@ -15,14 +15,16 @@ export default function Conversation({
   name,
   avatar,
   text,
-  isNewMessageRead
+  isNewMessageRead,
+  selectedConvId
 }) {
   return (
     <div
       className={classNames("container", {
-        select: user._id === selection
+        select: item._id === selection
       })}
-      id={user._id}
+      id={item._id}
+      onClick={() => selectedConvId(item._id)}
     >
       <div className="conversation">
         <div

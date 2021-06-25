@@ -84,6 +84,7 @@ $primary-color: #0c87b8;
 
   &__input {
     display: flex;
+    position: relative;
     padding: 20px;
     border-top: 1px solid #dadee0;
     width: 100%;

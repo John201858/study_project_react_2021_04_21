@@ -38,13 +38,15 @@ export default function MessageList() {
   });
   const [attachmens, setAttachmens] = useState(null);
   const [emojiView, setEmojiView] = useState(false);
+  const [emoji, setEmoji] = useState({});
   const scrollMessageList = useRef(null);
   const refTextarea = useRef(null);
   const items = useSelector((state) => state.message.items);
   const status = useSelector((state) => state.message.status);
   const dispatch = useDispatch();
 
-  console.log(files);
+  // console.log(files);
+  console.log(emoji);
 
   useEffect(() => {
     scrollMessageList.current.scrollTop = scroll;
@@ -63,16 +65,16 @@ export default function MessageList() {
   const getContentBox = (content) => {
     setAttachmens(content);
     console.log(content);
-  }
+  };
 
   const updateUploadedFiles = (file) => {
     setFiles(file);
   };
 
   const send = () => {
-    const filesURL = files.map((file) => URL.createObjectURL(file));
+    // const filesURL = files.map((file) => URL.createObjectURL(file));
 
-    dispatch(sendServerMessage(nanoid(), change, filesURL));
+    dispatch(sendServerMessage(nanoid(), change));
     setScroll(scrollMessageList.current.scrollHeight);
     setChange("");
   };
@@ -117,7 +119,6 @@ export default function MessageList() {
         refEditMessage={refEditMessage}
       />
     ));
-    console.log(<Picker/>);
 
   return (
     <section className="messageList">
@@ -147,7 +148,7 @@ export default function MessageList() {
           <Spin
             className="messageList__content-loading"
             size="large"
-            tip="Загрузка..."
+            tip="Загрузка сообщений..."
           />
         )}
         {data || (
@@ -160,20 +161,25 @@ export default function MessageList() {
         )}
       </div>
       <div className="messageList__input">
-        <SmileOutlined 
+        <SmileOutlined
           onClick={() => setEmojiView(!emojiView)}
-          className="messageList__input-icon" 
+          className="messageList__input-icon"
         />
-        {emojiView && <Picker 
+        {emojiView && (
+          <Picker
             style={{
-              position: "absolute", 
+              position: "absolute",
               bottom: "65px",
               left: "20px"
-            }} 
+            }}
             sheetSize="32"
-            onClick={() => setEmojiView(false)}
+            onClick={(emoji, event) => {
+              setEmojiView(false);
+              setEmoji(emoji);
+              setChange((change) => change + emoji.native);
+            }}
           />
-        }
+        )}
         <textarea
           rows="1"
           value={change}
@@ -183,13 +189,13 @@ export default function MessageList() {
           }}
           placeholder="Введите сообщение..."
         ></textarea>
-        <FileUpload
+        {/* <FileUpload
           accept=".jpg,.png,.jpeg"
           label="Profile Image(s)"
           multiple
           updateFilesCb={updateUploadedFiles}
           getContentBox={getContentBox}
-        />
+        /> */}
         {checkEventEdit.flag ? (
           <CheckCircleOutlined
             onClick={editedMessage}

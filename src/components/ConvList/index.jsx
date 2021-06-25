@@ -1,22 +1,46 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+
+import { useSelector, useDispatch } from "react-redux";
+import { nanoid } from "@reduxjs/toolkit";
+
+import { conversationListDownload } from "../../store/conversationReducer";
 
 import Conversation from "../Conversation";
 
 import sortBy from "lodash/sortBy";
-import { Button, Empty } from "antd";
+import { Button, Empty, Spin } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 
 import "antd/dist/antd.css";
 import "./ConvList.scss";
 
-export default function ConvList({ users }) {
+export default function ConvList() {
   const [selection, setSelection] = useState("");
-  
+
+  const items = useSelector(state => state.conversation.items);
+  const status = useSelector((state) => state.conversation.status);
+  const dispatch = useDispatch();
+
   const sort = sortBy(
-    users, data => new Date(data.date)
+    items, item => new Date(item.date)
   ).reverse();
 
   const [filtred, setFiltred] = useState(Array.from(sort))
+
+  useEffect(() => {
+    if (status === "idle") {
+      dispatch(conversationListDownload);
+    }
+    if (sort) {
+      setFiltred(sort);
+    }
+  }, [status, dispatch]);
+
+  console.log(filtred);
+
+  const selectedConvId = (id) => {
+    setSelection(id);
+  }
 
   const filtration = value => {
     setFiltred(
@@ -26,15 +50,8 @@ export default function ConvList({ users }) {
     );
   }
 
-  const headerClick = (event) => {
-    console.log(event.target.closest("div[id]").id);
-    setSelection(
-      (selection) => (selection = event.target.closest("div[id]").id)
-    );
-  };
-
   return (
-    <div className="convList" onClick={headerClick}>
+    <div className="convList">
       <div className="convList__header">
         <div className="convList__header-top">
           <p>Диалоги ({filtred.length})</p>
@@ -48,20 +65,28 @@ export default function ConvList({ users }) {
         </div>
       </div>
       <div className="convList__container">
-        {filtred.length ? filtred.map((user) => (
+        {status === "loading" && (
+          <Spin
+            className="convList__container-loading"
+            size="large"
+            tip="Загрузка бесед..."
+          />
+        )}
+        {filtred.length ? filtred.map((item) => (
           <Conversation
-            key={user._id}
-            user={user}
-            date={user.date}
-            isMe={user.isActive}
-            isOnline={user.isRead}
-            isRead={user.isRead}
-            numbMessage={user.numbMessage}
-            name={user.name}
-            avatar={user.avatar}
-            text={user.text}
-            isNewMessageRead={user.isRead}
+            key={item._id}
+            item={item}
+            date={item.date}
+            isMe={item.isActive}
+            isOnline={item.isRead}
+            isRead={item.isRead}
+            numbMessage={item.numbMessage}
+            name={item.name}
+            avatar={item.avatar}
+            text={item.text}
+            isNewMessageRead={item.isRead}
             selection={selection}
+            selectedConvId={selectedConvId}
           />
         )) : 
         <div className="convList__container-empty">
