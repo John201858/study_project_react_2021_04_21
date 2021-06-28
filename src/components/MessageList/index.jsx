@@ -44,10 +44,13 @@ export default function MessageList() {
   const refTextarea = useRef(null);
   const items = useSelector((state) => state.message.items);
   const status = useSelector((state) => state.message.status);
+  const selectedMessage = useSelector(
+    (state) => state.conversation.selectedConversation
+  );
   const dispatch = useDispatch();
 
   // console.log(files);
-  console.log(emoji);
+  console.log(selectedMessage);
 
   useEffect(() => {
     scrollMessageList.current.scrollTop = scroll;
@@ -58,10 +61,10 @@ export default function MessageList() {
   });
 
   useEffect(() => {
-    if (status === "idle") {
-      dispatch(messageListDownload);
+    if (selectedMessage) {
+      dispatch(messageListDownload(selectedMessage));
     }
-  }, [status, dispatch]);
+  }, [selectedMessage, dispatch]);
 
   const getContentBox = (content) => {
     setAttachmens(content);
@@ -125,7 +128,7 @@ export default function MessageList() {
     <section className="messageList">
       <div className="messageList__header">
         <div className="messageList__header-user">
-          {!items ? (
+          {status === "loading" ? (
             <>
               <Skeleton.Avatar
                 className="messageList__header-user_sceletAvatar"
@@ -137,28 +140,31 @@ export default function MessageList() {
               />
             </>
           ) : (
-            <>
-              <img src={items[0].avatar} alt={`Avatar ${items[0].name}`} />
-              <p>{items[0].name}</p>
-            </>
+            items && (
+              <>
+                <img src={items[0].avatar} alt={`Avatar ${items[0].name}`} />
+                <p>{items[0].name}</p>
+              </>
+            )
           )}
         </div>
       </div>
       <div ref={scrollMessageList} className="messageList__content">
-        {status === "loading" && (
+        {status === "loading" ? (
           <Spin
             className="messageList__content-loading"
             size="large"
             tip="Загрузка сообщений..."
           />
-        )}
-        {data || (
-          <div className="messageList__content-empty">
-            <Empty
-              style={{ color: "rgba(71, 84, 102, 0.7)" }}
-              description="Нет сообщений"
-            />
-          </div>
+        ) : (
+          data || (
+            <div className="messageList__content-empty">
+              <Empty
+                style={{ color: "rgba(71, 84, 102, 0.7)" }}
+                description="Нет сообщений"
+              />
+            </div>
+          )
         )}
       </div>
       <div className="messageList__input">

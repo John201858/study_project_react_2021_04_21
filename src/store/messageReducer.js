@@ -12,8 +12,8 @@ const messageReducer = createSlice({
   initialState,
   reducers: {
     sendMessage: {
-      reducer(state, action) {
-        state.items.push(action.payload);
+      reducer(state, { payload }) {
+        state.items.push(payload);
       },
       prepare(id, text, attachmens) {
         return {
@@ -31,12 +31,11 @@ const messageReducer = createSlice({
         };
       }
     },
-    deleteMessage(state, action) {
-      const id = action.payload;
-      state.items = state.items.filter((message) => message._id !== id);
+    deleteMessage(state, { payload }) {
+      state.items = state.items.filter((message) => message._id !== payload);
     },
-    editMessage(state, action) {
-      const { id, text } = action.payload;
+    editMessage(state, { payload }) {
+      const { id, text } = payload;
       const message = state.items.find((message) => message._id === id);
       if (message) {
         message.text = text;
@@ -56,22 +55,22 @@ const messageReducer = createSlice({
     messageListLoading(state, action) {
       state.status = "loading";
     },
-    messageListCompleted(state, action) {
-      state.items = action.payload;
+    messageListCompleted(state, { payload }) {
+      const { id, users } = payload;
+      const message = users.find((message) => message.messageId === id);
+      if (message) {
+        state.items = Array(message);
+      }
       state.status = "fulfilled";
     },
-    messageLoading(state, action) {
-      const message = state.items.find(
-        (message) => message._id === action.payload
-      );
+    messageLoading(state, { payload }) {
+      const message = state.items.find((message) => message._id === payload);
       if (message) {
         message.messageStatus = "loading";
       }
     },
-    messageCompleted(state, action) {
-      const message = state.items.find(
-        (message) => message._id === action.payload
-      );
+    messageCompleted(state, { payload }) {
+      const message = state.items.find((message) => message._id === payload);
       if (message) {
         message.messageStatus = "fulfilled";
       }
@@ -79,14 +78,17 @@ const messageReducer = createSlice({
   }
 });
 
-export function messageListDownload(dispatch, getState) {
+export const messageListDownload = (id) => (dispatch, getState) => {
   dispatch(messageListLoading());
   setTimeout(() => {
-    dispatch(messageListCompleted(users));
+    dispatch(messageListCompleted({ id, users }));
   }, 5000);
-}
+};
 
-export const sendServerMessage = (id, text, attachmens) => (dispatch, getState) => {
+export const sendServerMessage = (id, text, attachmens) => (
+  dispatch,
+  getState
+) => {
   dispatch(sendMessage(id, text, attachmens));
   dispatch(messageLoading(id));
   setTimeout(() => {

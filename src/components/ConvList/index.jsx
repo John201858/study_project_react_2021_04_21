@@ -5,7 +5,8 @@ import { nanoid } from "@reduxjs/toolkit";
 
 import {
   conversationListDownload,
-  conversationId
+  conversationId,
+  selectedConversation
 } from "../../store/conversationReducer";
 
 import Conversation from "../Conversation";
@@ -40,6 +41,7 @@ export default function ConvList() {
 
   const selectedConvId = (id) => {
     setSelection(id);
+    dispatch(selectedConversation(id));
   };
 
   const filtration = (value) => {

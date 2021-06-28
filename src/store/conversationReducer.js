@@ -4,7 +4,8 @@ import users from "../../../users.json";
 
 const initialState = {
   items: null,
-  status: "idle"
+  status: "idle",
+  selectedConversation: null
 };
 
 const conversationReducer = createSlice({
@@ -14,9 +15,12 @@ const conversationReducer = createSlice({
     conversationListLoading(state, action) {
       state.status = "loading";
     },
-    conversationListCompleted(state, action) {
-      state.items = action.payload;
+    conversationListCompleted(state, { payload }) {
+      state.items = payload;
       state.status = "fulfilled";
+    },
+    selectedConversation(state, { payload }) {
+      state.selectedConversation = payload;
     }
     // selectConversationId(state, action) {
     //   const conversationId = state.items.find(
@@ -40,7 +44,8 @@ export const ConversationId = (state, id) =>
 
 export const {
   conversationListLoading,
-  conversationListCompleted
+  conversationListCompleted,
+  selectedConversation
 } = conversationReducer.actions;
 
 export default conversationReducer.reducer;
