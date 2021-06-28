@@ -60,6 +60,8 @@ const messageReducer = createSlice({
       const message = users.find((message) => message.messageId === id);
       if (message) {
         state.items = Array(message);
+      } else {
+        state.items = [];
       }
       state.status = "fulfilled";
     },

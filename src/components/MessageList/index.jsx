@@ -102,27 +102,47 @@ export default function MessageList() {
     setCheckEventEdit({ flag: true, id });
   };
 
-  const data =
-    items &&
-    items.map((item) => (
-      <Message
-        id={item._id}
-        key={item._id}
-        avatar={item.avatar}
-        name={item.name}
-        isMe={item.isRead}
-        text={item.text}
-        date={item.date}
-        isRead={item.isActive}
-        attachmens={item.attachmens}
-        isOnline={item.isActive}
-        loading={item.messageStatus === "loading"}
-        error={false}
-        blockEditMessage={checkEventEdit.flag}
-        refDeleteMessage={refDeleteMessage}
-        refEditMessage={refEditMessage}
-      />
-    ));
+  let data;
+
+    if (items) {
+      if (items.length < 1) {
+       data = <div className="messageList__content-empty">
+          <Empty
+            style={{ color: "rgba(71, 84, 102, 0.7)" }}
+            description="Нет сообщений"
+          />
+      </div>
+      } else {
+        data = items.map((item) => (
+          <Message
+            id={item._id}
+            key={item._id}
+            avatar={item.avatar}
+            name={item.name}
+            isMe={item.isRead}
+            text={item.text}
+            date={item.date}
+            isRead={item.isActive}
+            attachmens={item.attachmens}
+            isOnline={item.isActive}
+            loading={item.messageStatus === "loading"}
+            error={false}
+            blockEditMessage={checkEventEdit.flag}
+            refDeleteMessage={refDeleteMessage}
+            refEditMessage={refEditMessage}
+          />
+        ));
+      }
+    } else {
+      data = <div className="messageList__content-empty">
+        <Empty
+          style={{ color: "rgba(71, 84, 102, 0.7)" }}
+          description="Выберите беседу"
+        />
+      </div>
+    }
+
+    console.log(items);
 
   return (
     <section className="messageList">
@@ -140,13 +160,22 @@ export default function MessageList() {
               />
             </>
           ) : (
-            items && (
+            items && ( items.length < 1 ? (
+              <>
+              <Skeleton.Avatar
+                className="messageList__header-user_sceletAvatar"
+              />
+              <Skeleton.Input
+                className="messageList__header-user_sceletText"
+              />
+            </>
+            ) : (
               <>
                 <img src={items[0].avatar} alt={`Avatar ${items[0].name}`} />
                 <p>{items[0].name}</p>
               </>
             )
-          )}
+          ))}
         </div>
       </div>
       <div ref={scrollMessageList} className="messageList__content">
@@ -156,16 +185,7 @@ export default function MessageList() {
             size="large"
             tip="Загрузка сообщений..."
           />
-        ) : (
-          data || (
-            <div className="messageList__content-empty">
-              <Empty
-                style={{ color: "rgba(71, 84, 102, 0.7)" }}
-                description="Нет сообщений"
-              />
-            </div>
-          )
-        )}
+        ) : data}
       </div>
       <div className="messageList__input">
         <SmileOutlined
