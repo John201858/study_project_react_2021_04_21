@@ -1,8 +1,10 @@
 import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
 
 import users from "../../../users.json";
+import messages from "../../../messages.json";
 
 const initialState = {
+  _id: "",
   items: null,
   status: "idle"
 };
@@ -56,10 +58,10 @@ const messageReducer = createSlice({
       state.status = "loading";
     },
     messageListCompleted(state, { payload }) {
-      const { id, users } = payload;
-      const message = users.find((message) => message.messageId === id);
+      const { id, messages } = payload;
+      const message = messages.find((message) => message._id === id);
       if (message) {
-        state.items = Array(message);
+        state.items = message.items;
       } else {
         state.items = [];
       }
@@ -83,7 +85,7 @@ const messageReducer = createSlice({
 export const messageListDownload = (id) => (dispatch, getState) => {
   dispatch(messageListLoading());
   setTimeout(() => {
-    dispatch(messageListCompleted({ id, users }));
+    dispatch(messageListCompleted({ id, messages }));
   }, 5000);
 };
 
@@ -103,6 +105,9 @@ export const sendServerMessage = (id, text, attachmens) => (
 //     return message;
 //   }, 5000);
 // });
+
+export const lastMessage = (state, id) =>
+  state.items.find((message) => message._id === id);
 
 export const {
   sendMessage,

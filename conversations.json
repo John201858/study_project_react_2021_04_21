@@ -1,0 +1,102 @@
+[
+  {
+    "_id": "60d9befb8f096594f1da58e9",
+    "avatar": "https://loremflickr.com/320/240?random=1",
+    "name": "Kendra Rutledge",
+    "isMe": false,
+    "isRead": true,
+    "isOnline": true,
+    "numbMessageRead": 0,
+    "isNewMessageRead": false
+  },
+  {
+    "_id": "60d9befbbc95e8bdae614695",
+    "avatar": "https://loremflickr.com/320/240?random=8",
+    "name": "Lydia Frank",
+    "isMe": true,
+    "isRead": false,
+    "isOnline": true,
+    "numbMessageRead": 7,
+    "isNewMessageRead": true
+  },
+  {
+    "_id": "60d9befb85c498bad1ff7032",
+    "avatar": "https://loremflickr.com/320/240?random=10",
+    "name": "Carlene Dodson",
+    "isMe": false,
+    "isRead": true,
+    "isOnline": false,
+    "numbMessageRead": 4,
+    "isNewMessageRead": true
+  },
+  {
+    "_id": "60d9befb8f3eb326b9500c9f",
+    "avatar": "https://loremflickr.com/320/240?random=10",
+    "name": "Wells Austin",
+    "isMe": true,
+    "isRead": true,
+    "isOnline": true,
+    "numbMessageRead": 6,
+    "isNewMessageRead": true
+  },
+  {
+    "_id": "60d9befb605ff3c5bcaabab4",
+    "avatar": "https://loremflickr.com/320/240?random=2",
+    "name": "Marcie Carroll",
+    "isMe": false,
+    "isRead": true,
+    "isOnline": false,
+    "numbMessageRead": 19,
+    "isNewMessageRead": false
+  },
+  {
+    "_id": "60d9befb48b15d791afc99e6",
+    "avatar": "https://loremflickr.com/320/240?random=7",
+    "name": "Fitzpatrick Velazquez",
+    "isMe": true,
+    "isRead": true,
+    "isOnline": true,
+    "numbMessageRead": 10,
+    "isNewMessageRead": false
+  },
+  {
+    "_id": "60d9befb483d6c2ab8773eaf",
+    "avatar": "https://loremflickr.com/320/240?random=6",
+    "name": "Cheryl Kerr",
+    "isMe": false,
+    "isRead": false,
+    "isOnline": true,
+    "numbMessageRead": 4,
+    "isNewMessageRead": false
+  },
+  {
+    "_id": "60d9befb69aca699839c70bc",
+    "avatar": "https://loremflickr.com/320/240?random=8",
+    "name": "Carmen Hayes",
+    "isMe": true,
+    "isRead": false,
+    "isOnline": true,
+    "numbMessageRead": 0,
+    "isNewMessageRead": false
+  },
+  {
+    "_id": "60d9befb58920eb3af4a2d37",
+    "avatar": "https://loremflickr.com/320/240?random=6",
+    "name": "Cooke Beach",
+    "isMe": false,
+    "isRead": true,
+    "isOnline": false,
+    "numbMessageRead": 6,
+    "isNewMessageRead": false
+  },
+  {
+    "_id": "60d9befbd124057d7f252b86",
+    "avatar": "https://loremflickr.com/320/240?random=3",
+    "name": "Geneva Garrett",
+    "isMe": false,
+    "isRead": true,
+    "isOnline": true,
+    "numbMessageRead": 3,
+    "isNewMessageRead": true
+  }
+]

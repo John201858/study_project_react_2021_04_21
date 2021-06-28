@@ -2,6 +2,8 @@ import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
 
 import users from "../../../users.json";
 
+import conversations from "../../../conversations.json";
+
 const initialState = {
   items: null,
   status: "idle",
@@ -35,7 +37,7 @@ const conversationReducer = createSlice({
 export function conversationListDownload(dispatch, getState) {
   dispatch(conversationListLoading());
   setTimeout(() => {
-    dispatch(conversationListCompleted(users));
+    dispatch(conversationListCompleted(conversations));
   }, 5000);
 }
 

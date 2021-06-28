@@ -9,6 +9,8 @@ import {
   selectedConversation
 } from "../../store/conversationReducer";
 
+// import { lastMessage } from "../../store/messageReducer";
+
 import Conversation from "../Conversation";
 
 import sortBy from "lodash/sortBy";
@@ -23,7 +25,7 @@ export default function ConvList() {
 
   const items = useSelector((state) => state.conversation.items);
   const status = useSelector((state) => state.conversation.status);
-  // const messages = useSelector(state => conversationId(state.conversation, selection));
+  // const messages = useSelector(state => state.message.items);
   const dispatch = useDispatch();
 
   const sort = sortBy(items, (item) => new Date(item.date)).reverse();
@@ -84,14 +86,14 @@ export default function ConvList() {
               key={item._id}
               item={item}
               date={item.date}
-              isMe={item.isActive}
-              isOnline={item.isRead}
+              isMe={item.isMe}
+              isOnline={item.isOnline}
               isRead={item.isRead}
               numbMessage={item.numbMessage}
               name={item.name}
               avatar={item.avatar}
               text={item.text}
-              isNewMessageRead={item.isRead}
+              isNewMessageRead={item.isNewMessageRead}
               selection={selection}
               selectedConvId={selectedConvId}
             />
