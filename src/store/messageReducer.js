@@ -1,10 +1,9 @@
-import { createSlice, createAsyncThunk, nanoid } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 import users from "../../../users.json";
-import messages from "../../../messages.json";
+// import messages from "../../../messages.json";
 
 const initialState = {
-  _id: "",
   items: null,
   status: "idle"
 };
@@ -58,10 +57,10 @@ const messageReducer = createSlice({
       state.status = "loading";
     },
     messageListCompleted(state, { payload }) {
-      const { id, messages } = payload;
-      const message = messages.find((message) => message._id === id);
+      const { id, users } = payload;
+      const message = users.find((message) => message._id === id);
       if (message) {
-        state.items = message.items;
+        state.items = Array(message);
       } else {
         state.items = [];
       }
@@ -85,7 +84,7 @@ const messageReducer = createSlice({
 export const messageListDownload = (id) => (dispatch, getState) => {
   dispatch(messageListLoading());
   setTimeout(() => {
-    dispatch(messageListCompleted({ id, messages }));
+    dispatch(messageListCompleted({ id, users }));
   }, 5000);
 };
 

@@ -121,12 +121,12 @@ export default function MessageList() {
           key={item._id}
           avatar={item.avatar}
           name={item.name}
-          isMe={item.isMe}
+          isMe={item.isRead}
           text={item.text}
           date={item.date}
-          isRead={item.isRead}
+          isRead={item.isActive}
           attachmens={item.attachmens}
-          isOnline={item.isOnline}
+          isOnline={item.isActive}
           loading={item.messageStatus === "loading"}
           error={false}
           blockEditMessage={checkEventEdit.flag}
