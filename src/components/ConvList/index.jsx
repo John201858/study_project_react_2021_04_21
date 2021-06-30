@@ -86,14 +86,14 @@ export default function ConvList() {
               key={item._id}
               item={item}
               date={item.date}
-              isMe={item.isActive}
-              isOnline={item.isRead}
+              isMe={item.isMe}
+              isOnline={item.isOnline}
               isRead={item.isRead}
-              numbMessage={item.numbMessage}
+              numbNotReadMessages={item.numbNotReadMessages}
               name={item.name}
               avatar={item.avatar}
               text={item.text}
-              isNewMessageRead={item.isRead}
+              isReadMessage={item.isReadMessage}
               selection={selection}
               selectedConvId={selectedConvId}
             />

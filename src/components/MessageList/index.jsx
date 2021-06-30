@@ -50,7 +50,7 @@ export default function MessageList() {
   const dispatch = useDispatch();
 
   // console.log(files);
-  console.log(selectedMessage);
+  // console.log(selectedMessage);
 
   useEffect(() => {
     scrollMessageList.current.scrollTop = scroll;
@@ -121,12 +121,12 @@ export default function MessageList() {
           key={item._id}
           avatar={item.avatar}
           name={item.name}
-          isMe={item.isRead}
+          isMe={item.isMe}
           text={item.text}
           date={item.date}
-          isRead={item.isActive}
+          isRead={item.isRead}
           attachmens={item.attachmens}
-          isOnline={item.isActive}
+          isOnline={item.isOnline}
           loading={item.messageStatus === "loading"}
           error={false}
           blockEditMessage={checkEventEdit.flag}
@@ -146,7 +146,6 @@ export default function MessageList() {
     );
   }
 
-  console.log(items);
 
   return (
     <section className="messageList">

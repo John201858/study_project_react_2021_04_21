@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 import users from "../../../users.json";
 
@@ -34,11 +35,15 @@ const conversationReducer = createSlice({
   }
 });
 
-export function conversationListDownload(dispatch, getState) {
+export const conversationListDownload = async (dispatch, getState) => {
   dispatch(conversationListLoading());
-  setTimeout(() => {
-    dispatch(conversationListCompleted(users));
-  }, 5000);
+  const response = await axios.get(`https://api.json-generator.com/templates/R6-T7jC5AbYz/data?access_token=jh675lhpsw77ljzar3bkf09sibkpkp3zotykb3qu`);
+  try {
+    console.log(response.data);
+    dispatch(conversationListCompleted(response.data.conversations));
+  } catch(err) {
+    console.log(err);
+  }
 }
 
 export const ConversationId = (state, id) =>

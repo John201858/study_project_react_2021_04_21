@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
 
 import users from "../../../users.json";
 // import messages from "../../../messages.json";
@@ -22,7 +23,7 @@ const messageReducer = createSlice({
             _id: id,
             isMe: true,
             avatar: "https://loremflickr.com/320/240?random",
-            name: "Me",
+            name: "Вы",
             text,
             attachmens,
             date: new Date(),
@@ -57,10 +58,13 @@ const messageReducer = createSlice({
       state.status = "loading";
     },
     messageListCompleted(state, { payload }) {
-      const { id, users } = payload;
-      const message = users.find((message) => message._id === id);
-      if (message) {
-        state.items = Array(message);
+      const { id, conversations } = payload;
+      const conversation = conversations.find(
+        (conversation) => conversation._id === id
+      );
+      if (conversation) {
+        console.log(conversation.messages.items);
+        state.items = conversation.messages.items;
       } else {
         state.items = [];
       }
@@ -81,11 +85,20 @@ const messageReducer = createSlice({
   }
 });
 
-export const messageListDownload = (id) => (dispatch, getState) => {
+export const messageListDownload = (id) => async (dispatch, getState) => {
   dispatch(messageListLoading());
-  setTimeout(() => {
-    dispatch(messageListCompleted({ id, users }));
-  }, 5000);
+  const response = await axios.get(
+    `https://api.json-generator.com/templates/R6-T7jC5AbYz/data?access_token=jh675lhpsw77ljzar3bkf09sibkpkp3zotykb3qu`
+  );
+  // jh675lhpsw77ljzar3bkf09sibkpkp3zotykb3qu
+  try {
+    console.log(response.data);
+    dispatch(
+      messageListCompleted({ id, conversations: response.data.conversations })
+    );
+  } catch (err) {
+    console.log(err);
+  }
 };
 
 export const sendServerMessage = (id, text, attachmens) => (

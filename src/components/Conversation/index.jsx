@@ -11,11 +11,11 @@ export default function Conversation({
   isMe,
   isOnline,
   isRead,
-  numbMessage,
+  numbNotReadMessages,
   name,
   avatar,
   text,
-  isNewMessageRead,
+  isReadMessage,
   selectedConvId
 }) {
   return (
@@ -45,9 +45,9 @@ export default function Conversation({
           <div className="conversation__data-text">
             <p>{isMe ? `Вы: ${text}` : `${name}: ${text}`}</p>
             {(isMe && <CheckRead isRead={isRead} />) ||
-              (isNewMessageRead && (
+              (isReadMessage && (
                 <span className="conversation__data-text--count">
-                  {numbMessage > 9 ? "9+" : numbMessage}
+                  {numbNotReadMessages > 9 ? "9+" : numbNotReadMessages}
                 </span>
               ))}
           </div>
@@ -64,9 +64,9 @@ Conversation.propTypes = {
   isMe: PropTypes.bool,
   isOnline: PropTypes.bool,
   isRead: PropTypes.bool,
-  numbMessage: PropTypes.number,
+  numbNotReadMessages: PropTypes.number,
   name: PropTypes.string,
   avatar: PropTypes.string,
   text: PropTypes.string,
-  isNewMessageRead: PropTypes.bool
+  isReadMessage: PropTypes.bool
 };
