@@ -63,7 +63,6 @@ const messageReducer = createSlice({
         (conversation) => conversation._id === id
       );
       if (conversation) {
-        console.log(conversation.messages.items);
         state.items = conversation.messages.items;
       } else {
         state.items = [];
@@ -92,7 +91,6 @@ export const messageListDownload = (id) => async (dispatch, getState) => {
   );
   // jh675lhpsw77ljzar3bkf09sibkpkp3zotykb3qu
   try {
-    console.log(response.data);
     dispatch(
       messageListCompleted({ id, conversations: response.data.conversations })
     );

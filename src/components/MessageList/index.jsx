@@ -66,6 +66,12 @@ export default function MessageList() {
     }
   }, [selectedMessage, dispatch]);
 
+  useEffect(() => {
+    if (status === "fulfilled") {
+      setScroll(scrollMessageList.current.scrollHeight);
+    }
+  }, [status]);
+
   const getContentBox = (content) => {
     setAttachmens(content);
     console.log(content);
@@ -145,7 +151,6 @@ export default function MessageList() {
       </div>
     );
   }
-
 
   return (
     <section className="messageList">

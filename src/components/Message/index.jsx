@@ -65,7 +65,7 @@ export default function Message({
         </div>
         <div className="message__content">
           <div className="message__content-user">
-            <p>{name}</p>
+            <p>{isMe ? "Вы" : name}</p>
             <span>
               {isMe && (
                 <CheckRead isRead={isRead} loading={loading} error={error} />

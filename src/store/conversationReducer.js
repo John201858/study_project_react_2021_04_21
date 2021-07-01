@@ -37,14 +37,15 @@ const conversationReducer = createSlice({
 
 export const conversationListDownload = async (dispatch, getState) => {
   dispatch(conversationListLoading());
-  const response = await axios.get(`https://api.json-generator.com/templates/R6-T7jC5AbYz/data?access_token=jh675lhpsw77ljzar3bkf09sibkpkp3zotykb3qu`);
+  const response = await axios.get(
+    `https://api.json-generator.com/templates/R6-T7jC5AbYz/data?access_token=jh675lhpsw77ljzar3bkf09sibkpkp3zotykb3qu`
+  );
   try {
-    console.log(response.data);
     dispatch(conversationListCompleted(response.data.conversations));
-  } catch(err) {
+  } catch (err) {
     console.log(err);
   }
-}
+};
 
 export const ConversationId = (state, id) =>
   state.items.find((item) => item._id === id);
