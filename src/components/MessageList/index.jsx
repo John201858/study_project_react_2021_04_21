@@ -10,7 +10,7 @@ import {
   sendServerMessage,
   messageListDownload
 } from "../../store/messageReducer";
-import { conversationId } from "../../store/conversationReducer";
+// import { conversationId } from "../../store/conversationReducer";
 
 import {
   SendOutlined,
@@ -29,9 +29,15 @@ import FileUpload from "../FileUpload";
 import "./MessageList.scss";
 import autoResizeTexarea from "../../otherFunction/autoResizeTextarea.js";
 
+// import PerfectScrollbar from "react-perfect-scrollbar";
+// import "react-perfect-scrollbar/dist/css/styles.css";
+
 export default function MessageList() {
   const [change, setChange] = useState("");
-  const [scroll, setScroll] = useState(null);
+  const [scroll, setScroll] = useState({
+    flag: false,
+    value: null
+  });
   const [files, setFiles] = useState();
   const [checkEventEdit, setCheckEventEdit] = useState({
     flag: false,
@@ -53,10 +59,11 @@ export default function MessageList() {
   // console.log(selectedMessage);
 
   useEffect(() => {
-    scrollMessageList.current.scrollTop = scroll;
-  }, [scroll]);
+    if (scroll.flag) {
+      scrollMessageList.current.scrollTop = scroll.value;
+      setScroll({ flag: false });
+    }
 
-  useEffect(() => {
     autoResizeTexarea(refTextarea.current);
   });
 
@@ -68,7 +75,10 @@ export default function MessageList() {
 
   useEffect(() => {
     if (status === "fulfilled") {
-      setScroll(scrollMessageList.current.scrollHeight);
+      setScroll({
+        flag: true,
+        value: scrollMessageList.current.scrollHeight
+      });
     }
   }, [status]);
 
@@ -85,8 +95,12 @@ export default function MessageList() {
     // const filesURL = files.map((file) => URL.createObjectURL(file));
 
     dispatch(sendServerMessage(nanoid(), change));
-    setScroll(scrollMessageList.current.scrollHeight);
+    setScroll({
+      flag: true,
+      value: scrollMessageList.current.scrollHeight
+    });
     setChange("");
+    console.log(scroll.value);
   };
 
   const editedMessage = () => {
@@ -206,7 +220,6 @@ export default function MessageList() {
               bottom: "65px",
               left: "20px"
             }}
-            sheetSize="32"
             onClick={(emoji, event) => {
               setEmojiView(false);
               setEmoji(emoji);

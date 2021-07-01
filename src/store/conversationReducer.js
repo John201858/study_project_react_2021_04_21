@@ -1,10 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-import users from "../../../users.json";
-
-// import conversations from "../../../conversations.json";
-
 const initialState = {
   items: null,
   status: "idle",
